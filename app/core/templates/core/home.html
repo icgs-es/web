@@ -24,7 +24,7 @@
       <p class="lead">Diseñamos, desplegamos y mantenemos los sistemas que mueven tu operación día a día: control horario, compras, almacén, planificación y datos — todo en un mismo sitio, funcionando de verdad.</p>
       <div class="hero-actions">
         <a href="#contacto" class="btn btn-primary">Solicitar propuesta</a>
-        <a href="#proyectos" class="btn btn-ghost">Ver un caso real →</a>
+        <a href="/proyectos/" class="btn btn-ghost">Ver un caso real →</a>
       </div>
       <div class="stack-tags">
         <span>Docker</span><span>Cloudflare</span><span>Caddy</span><span>Django</span><span>ORDIX</span>
@@ -71,24 +71,20 @@
     </div>
 
     <div class="proof-grid reveal">
+      {% for p in projects %}
       <div class="proof-card">
-        <span class="badge badge-live"><span class="d"></span>Beta comercial</span>
-        <p class="proof-quote" style="margin-top:20px;">Una plataforma de gestión de obra que <span class="hl">lee facturas, controla el almacén</span> y avisa cuando algo no cuadra — sin hojas de cálculo paralelas.</p>
-        <p style="color:var(--text-muted);font-size:14.5px;">Desarrollada e implantada por ICGS para una constructora. <!-- [CASO-ANON] --> En producción, con uso operativo real desde compras hasta cierre de partida.</p>
+        <span class="badge badge-live"><span class="d"></span>En producción</span>
+        <p class="proof-quote" style="margin-top:20px;">{{ p.summary }}</p>
+        {% if p.stack %}
+        <p style="color:var(--text-muted);font-size:13px;margin-top:12px;">{{ p.stack }}</p>
+        {% endif %}
+        <a href="/proyectos/" style="display:inline-block;margin-top:18px;font-size:14px;color:var(--clay);font-weight:600;">Ver todos los proyectos →</a>
       </div>
-
+      {% empty %}
       <div class="proof-card">
-        <div class="eyebrow" style="margin-bottom:18px;">Qué resuelve</div>
-        <ul class="feature-list">
-          <li>Control horario, agenda de equipo y comunicaciones centralizadas</li>
-          <li>CRM y seguimiento comercial</li>
-          <li>Gestión documental y de activos por proyecto</li>
-          <li>Planificación de obra y sincronización con sistemas ya existentes</li>
-          <li>Reconocimiento automático de facturas por proveedor (OCR)</li>
-          <li>Trazabilidad de almacén: qué entra, qué sale, a qué partida va</li>
-          <li>Control de albaranes para evitar duplicar stock o pagar dos veces</li>
-        </ul>
+        <p style="color:var(--text-muted);">Próximamente: casos reales en producción.</p>
       </div>
+      {% endfor %}
     </div>
   </div>
 </section>
@@ -102,26 +98,15 @@
     </div>
 
     <div class="cards-4 reveal">
+      {% for s in services %}
       <div class="scard">
-        <div class="num mono">01</div>
-        <h3>Infraestructura y despliegue</h3>
-        <p>Entornos estables con Docker, Cloudflare, Caddy y servidores Linux. Puestos en marcha y mantenidos, sin sorpresas a mitad de mes.</p>
+        <div class="num mono">{{ forloop.counter|stringformat:"02d" }}</div>
+        <h3>{{ s.title }}</h3>
+        <p>{{ s.summary }}</p>
       </div>
-      <div class="scard">
-        <div class="num mono">02</div>
-        <h3>Desarrollo de aplicaciones</h3>
-        <p>Software a medida y portales web pensados para el trabajo real de cada equipo, no para una demo bonita.</p>
-      </div>
-      <div class="scard">
-        <div class="num mono">03</div>
-        <h3>Automatización e integraciones</h3>
-        <p>Conectamos lo que ya usas para que deje de duplicar trabajo: facturas, almacén, tareas, comunicaciones.</p>
-      </div>
-      <div class="scard">
-        <div class="num mono">04</div>
-        <h3>IA aplicada al negocio</h3>
-        <p>Clasificación, lectura de documentos y apoyo operativo aplicados a un proceso concreto, no como adorno.</p>
-      </div>
+      {% empty %}
+      <p style="color:var(--text-muted);">Servicios próximamente.</p>
+      {% endfor %}
     </div>
   </div>
 </section>
