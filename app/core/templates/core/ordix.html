@@ -1,273 +1,188 @@
 {% extends "base.html" %}
 
 {% block title %}ORDIX CORE · Business OS para PYMEs{% endblock %}
+{% block meta_description %}ORDIX CORE centraliza tareas, agenda, archivos, comunicaciones e incidencias en una plataforma modular para PYMEs operativas.{% endblock %}
+
+{% block extra_css %}
+<style>
+  .ordix-hero { display:grid; grid-template-columns:1.6fr 1fr; gap:40px; align-items:start; }
+  .ordix-ia   { display:grid; grid-template-columns:1.4fr 1fr; gap:40px; align-items:center; }
+  @media(max-width:767px){
+    .ordix-hero, .ordix-ia { grid-template-columns:1fr; }
+  }
+</style>
+{% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="page-content">
+  <div class="wrap">
 
-  <!-- Hero ORDIX -->
-  <section class="home-section mb-5">
-    <div class="card shadow-sm home-card">
-      <div class="card-body p-5">
-        <div class="row align-items-center g-4">
-          <div class="col-lg-8">
-            <div class="badge text-bg-light border mb-3">ORDIX CORE · Business OS</div>
-
-            <h1 class="display-5 fw-bold mb-3">
-              El sistema operativo empresarial para PYMEs operativas.
-            </h1>
-
-            <p class="lead text-secondary mb-4">
-              ORDIX CORE centraliza tareas, agenda, archivos, comunicaciones, incidencias
-              y flujos internos de trabajo en una única plataforma modular, preparada para
-              automatización e inteligencia artificial aplicada.
-            </p>
-
-            <div class="d-flex flex-wrap gap-2">
-              <a class="btn site-btn-primary btn-lg" href="/contacto/">Solicitar información</a>
-              <a class="btn btn-outline-dark btn-lg" href="/">Volver a ICGS</a>
-            </div>
-          </div>
-
-          <div class="col-lg-4">
-            <div class="p-4 rounded-4 border bg-light">
-              <div class="fw-bold mb-2">Idea central</div>
-              <p class="text-secondary mb-0">
-                Pasar de información dispersa, tareas perdidas y comunicaciones aisladas
-                a un entorno operativo claro, trazable y accionable.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- Problema / solución -->
-  <section class="home-section mb-5">
-    <div class="home-section__head">
+    <!-- Hero -->
+    <div class="page-section ordix-hero">
       <div>
-        <h2 class="h3 fw-bold mb-1">Del caos operativo al orden estructurado</h2>
-        <div class="text-secondary">
-          ORDIX no solo guarda información: la convierte en trabajo organizado.
+        <div class="eyebrow">ORDIX CORE · Business OS</div>
+        <h1 style="font-size:clamp(28px,3.2vw,40px);margin-bottom:16px;">
+          El sistema operativo empresarial para PYMEs operativas.
+        </h1>
+        <p style="font-size:17px;color:var(--text-muted);margin-bottom:28px;">
+          ORDIX CORE centraliza tareas, agenda, archivos, comunicaciones, incidencias
+          y flujos internos de trabajo en una única plataforma modular, preparada para
+          automatización e inteligencia artificial aplicada.
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;">
+          <a class="btn btn-primary" href="/contacto/">Solicitar información</a>
+          <a class="btn btn-ghost" href="/">Volver a ICGS</a>
+        </div>
+      </div>
+      <div class="icgs-card">
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;margin-bottom:10px;">Idea central</div>
+        <p style="color:var(--text-muted);font-size:14.5px;margin:0;">
+          Pasar de información dispersa, tareas perdidas y comunicaciones aisladas
+          a un entorno operativo claro, trazable y accionable.
+        </p>
+      </div>
+    </div>
+
+    <!-- Problema / solución -->
+    <div class="page-section">
+      <div class="page-section-head">
+        <h2>Del caos operativo al orden estructurado</h2>
+        <p>ORDIX no solo guarda información: la convierte en trabajo organizado.</p>
+      </div>
+      <div class="g2">
+        <div class="icgs-card">
+          <h3 style="font-size:17px;margin-bottom:10px;">El problema habitual</h3>
+          <p style="color:var(--text-muted);font-size:14.5px;margin:0;">
+            Muchas empresas trabajan con correos, documentos, tareas, incidencias y mensajes
+            repartidos entre herramientas distintas. El resultado es pérdida de contexto,
+            duplicidades, falta de trazabilidad y dependencia de la memoria informal.
+          </p>
+        </div>
+        <div class="icgs-card">
+          <h3 style="font-size:17px;margin-bottom:10px;">La propuesta ORDIX</h3>
+          <p style="color:var(--text-muted);font-size:14.5px;margin:0;">
+            ORDIX crea una base común donde cada tarea, documento, contacto, incidencia
+            o comunicación queda vinculada al contexto correcto y preparada para operar,
+            revisar y automatizar.
+          </p>
         </div>
       </div>
     </div>
 
-    <div class="row g-4">
-      <div class="col-md-6">
-        <div class="card h-100 shadow-sm home-card">
-          <div class="card-body p-4">
-            <h3 class="h5 fw-bold mb-3">El problema habitual</h3>
-            <p class="text-secondary mb-0">
-              Muchas empresas trabajan con correos, documentos, tareas, incidencias y mensajes
-              repartidos entre herramientas distintas. El resultado es pérdida de contexto,
-              duplicidades, falta de trazabilidad y dependencia de la memoria informal.
-            </p>
-          </div>
-        </div>
+    <!-- Módulos principales -->
+    <div class="page-section">
+      <div class="page-section-head">
+        <h2>Módulos principales</h2>
+        <p>Una plataforma modular para construir gestión operativa real.</p>
       </div>
-
-      <div class="col-md-6">
-        <div class="card h-100 shadow-sm home-card">
-          <div class="card-body p-4">
-            <h3 class="h5 fw-bold mb-3">La propuesta ORDIX</h3>
-            <p class="text-secondary mb-0">
-              ORDIX crea una base común donde cada tarea, documento, contacto, incidencia
-              o comunicación queda vinculada al contexto correcto y preparada para operar,
-              revisar y automatizar.
-            </p>
-          </div>
+      <div class="g4">
+        <div class="icgs-card">
+          <h3 style="font-size:16px;margin-bottom:8px;">Agenda</h3>
+          <p style="color:var(--text-muted);font-size:14px;margin:0;">
+            Planificación, eventos, seguimiento temporal y coordinación de actividad.
+          </p>
         </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- Módulos -->
-  <section class="home-section mb-5">
-    <div class="home-section__head">
-      <div>
-        <h2 class="h3 fw-bold mb-1">Módulos principales</h2>
-        <div class="text-secondary">
-          Una plataforma modular para construir gestión operativa real.
+        <div class="icgs-card">
+          <h3 style="font-size:16px;margin-bottom:8px;">Tareas</h3>
+          <p style="color:var(--text-muted);font-size:14px;margin:0;">
+            Trabajo accionable, responsables, estados, prioridades y control operativo.
+          </p>
+        </div>
+        <div class="icgs-card">
+          <h3 style="font-size:16px;margin-bottom:8px;">Archivos</h3>
+          <p style="color:var(--text-muted);font-size:14px;margin:0;">
+            Repositorio documental conectado con procesos, tareas y comunicaciones.
+          </p>
+        </div>
+        <div class="icgs-card">
+          <h3 style="font-size:16px;margin-bottom:8px;">Comunicaciones</h3>
+          <p style="color:var(--text-muted);font-size:14px;margin:0;">
+            Entrada ligera de correo, clasificación, trazabilidad y conversión en acciones.
+          </p>
         </div>
       </div>
     </div>
 
-    <div class="row g-4">
-      <div class="col-md-6 col-lg-3">
-        <div class="card h-100 shadow-sm home-card">
-          <div class="card-body">
-            <h3 class="h5 fw-semibold">Agenda</h3>
-            <p class="text-secondary mb-0">
-              Planificación, eventos, seguimiento temporal y coordinación de actividad.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-3">
-        <div class="card h-100 shadow-sm home-card">
-          <div class="card-body">
-            <h3 class="h5 fw-semibold">Tareas</h3>
-            <p class="text-secondary mb-0">
-              Trabajo accionable, responsables, estados, prioridades y control operativo.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-3">
-        <div class="card h-100 shadow-sm home-card">
-          <div class="card-body">
-            <h3 class="h5 fw-semibold">Archivos</h3>
-            <p class="text-secondary mb-0">
-              Repositorio documental conectado con procesos, tareas y comunicaciones.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-3">
-        <div class="card h-100 shadow-sm home-card">
-          <div class="card-body">
-            <h3 class="h5 fw-semibold">Comunicaciones</h3>
-            <p class="text-secondary mb-0">
-              Entrada ligera de correo, clasificación, trazabilidad y conversión en acciones.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- IA y automatización -->
-  <section class="home-section mb-5">
-    <div class="card shadow-sm home-card">
-      <div class="card-body p-5">
-        <div class="row align-items-center g-4">
-          <div class="col-lg-7">
-            <div class="badge text-bg-light border mb-3">Automatización + IA</div>
-
-            <h2 class="h3 fw-bold mb-3">
+    <!-- IA y automatización -->
+    <div class="page-section">
+      <div class="icgs-card" style="padding:36px 40px;">
+        <div class="ordix-ia">
+          <div>
+            <div class="eyebrow">Automatización + IA</div>
+            <h2 style="font-size:clamp(22px,2.4vw,28px);margin-bottom:12px;">
               Inteligencia artificial con control humano.
             </h2>
-
-            <p class="text-secondary mb-0">
+            <p style="color:var(--text-muted);font-size:14.5px;margin:0;">
               ORDIX está diseñado para que la IA ayude a clasificar, resumir, detectar intención
               operativa y convertir información dispersa en tareas, documentos o incidencias,
               sin sustituir la decisión humana.
             </p>
           </div>
-
-          <div class="col-lg-5">
-            <ul class="text-secondary mb-0">
-              <li>Clasificación de comunicaciones entrantes</li>
-              <li>Detección de ruido y contenido útil</li>
-              <li>Creación asistida de tareas e incidencias</li>
-              <li>Trazabilidad completa de cada acción</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- Arquitectura -->
-  <section class="home-section mb-5">
-    <div class="home-section__head">
-      <div>
-        <h2 class="h3 fw-bold mb-1">Arquitectura preparada para SaaS</h2>
-        <div class="text-secondary">
-          Base modular, multiempresa y escalable.
+          <ul class="feature-list" style="margin-top:0;">
+            <li>Clasificación de comunicaciones entrantes</li>
+            <li>Detección de ruido y contenido útil</li>
+            <li>Creación asistida de tareas e incidencias</li>
+            <li>Trazabilidad completa de cada acción</li>
+          </ul>
         </div>
       </div>
     </div>
 
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm home-card">
-          <div class="card-body">
-            <h3 class="h5 fw-semibold">Multiempresa</h3>
-            <p class="text-secondary mb-0">
-              Separación estricta de datos por organización, usuarios y equipos de trabajo.
-            </p>
-          </div>
-        </div>
+    <!-- Arquitectura -->
+    <div class="page-section">
+      <div class="page-section-head">
+        <h2>Arquitectura preparada para SaaS</h2>
+        <p>Base modular, multiempresa y escalable.</p>
       </div>
-
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm home-card">
-          <div class="card-body">
-            <h3 class="h5 fw-semibold">Modular</h3>
-            <p class="text-secondary mb-0">
-              Capacidad de activar módulos según el nivel de madurez y necesidad de cada empresa.
-            </p>
-          </div>
+      <div class="g3">
+        <div class="icgs-card">
+          <h3 style="font-size:16px;margin-bottom:8px;">Multiempresa</h3>
+          <p style="color:var(--text-muted);font-size:14px;margin:0;">
+            Separación estricta de datos por organización, usuarios y equipos de trabajo.
+          </p>
         </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm home-card">
-          <div class="card-body">
-            <h3 class="h5 fw-semibold">Escalable</h3>
-            <p class="text-secondary mb-0">
-              Pensado para evolucionar hacia planes SaaS, automatización avanzada e integraciones.
-            </p>
-          </div>
+        <div class="icgs-card">
+          <h3 style="font-size:16px;margin-bottom:8px;">Modular</h3>
+          <p style="color:var(--text-muted);font-size:14px;margin:0;">
+            Capacidad de activar módulos según el nivel de madurez y necesidad de cada empresa.
+          </p>
+        </div>
+        <div class="icgs-card">
+          <h3 style="font-size:16px;margin-bottom:8px;">Escalable</h3>
+          <p style="color:var(--text-muted);font-size:14px;margin:0;">
+            Pensado para evolucionar hacia planes SaaS, automatización avanzada e integraciones.
+          </p>
         </div>
       </div>
     </div>
-  </section>
 
-
-  <!-- Sectores -->
-  <section class="home-section mb-5">
-    <div class="card shadow-sm home-card">
-      <div class="card-body p-5">
-        <h2 class="h3 fw-bold mb-3">Pensado para empresas de servicios operativos</h2>
-
-        <p class="text-secondary mb-4">
+    <!-- Sectores -->
+    <div class="page-section">
+      <div class="icgs-card" style="padding:36px 40px;">
+        <h2 style="font-size:clamp(22px,2.4vw,28px);margin-bottom:12px;">
+          Pensado para empresas de servicios operativos
+        </h2>
+        <p style="color:var(--text-muted);font-size:14.5px;margin-bottom:24px;">
           ORDIX CORE encaja especialmente en PYMEs que gestionan tareas, documentación,
           clientes, incidencias, agenda y comunicaciones de forma continua.
         </p>
-
-        <div class="row g-3">
-          <div class="col-md-4">
-            <div class="p-3 rounded-4 border bg-light">Empresas de mantenimiento</div>
-          </div>
-          <div class="col-md-4">
-            <div class="p-3 rounded-4 border bg-light">Servicios profesionales</div>
-          </div>
-          <div class="col-md-4">
-            <div class="p-3 rounded-4 border bg-light">Equipos técnicos y operativos</div>
-          </div>
+        <div class="g3" style="gap:12px;">
+          <div class="info-box">Empresas de mantenimiento</div>
+          <div class="info-box">Servicios profesionales</div>
+          <div class="info-box">Equipos técnicos y operativos</div>
         </div>
       </div>
     </div>
-  </section>
 
-
-  <!-- CTA final -->
-  <section class="home-cta">
-    <div class="home-cta__box">
-      <div class="row align-items-center g-3">
-        <div class="col-lg-8">
-          <h2 class="h4 fw-bold mb-1">¿Quieres conocer ORDIX CORE?</h2>
-          <div class="text-secondary">
-            Podemos analizar tu operativa y valorar si ORDIX encaja como base de gestión para tu empresa.
-          </div>
-        </div>
-        <div class="col-lg-4 text-lg-end">
-          <a class="btn site-btn-primary btn-lg" href="/contacto/">Solicitar información</a>
-        </div>
+    <!-- CTA final -->
+    <div class="cta-box">
+      <div>
+        <h2>¿Quieres conocer ORDIX CORE?</h2>
+        <p>Podemos analizar tu operativa y valorar si ORDIX encaja como base de gestión para tu empresa.</p>
       </div>
+      <a class="btn btn-primary" href="/contacto/">Solicitar información</a>
     </div>
-  </section>
 
+  </div>
 </div>
 {% endblock %}

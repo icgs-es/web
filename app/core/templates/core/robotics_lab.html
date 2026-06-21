@@ -2,167 +2,132 @@
 {% load static %}
 
 {% block title %}ICGS Robotics Lab · Robótica aplicada{% endblock %}
+{% block meta_description %}Software y operaciones para robótica aplicada. Convertimos robots comerciales en herramientas profesionales para inspección, rondas operativas y captura de evidencias.{% endblock %}
+
+{% block extra_css %}
+<style>
+  .robotics-hero { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; }
+  @media(max-width:767px){ .robotics-hero { grid-template-columns:1fr; } }
+
+  .robotics-video{
+    width:100%;display:block;
+    border-radius:4px;border:1px solid var(--line);
+    background:#0d1b2a;
+  }
+
+  .img-frame{
+    border:1px solid var(--line);border-radius:6px;overflow:hidden;
+  }
+  .img-frame img{ width:100%;display:block; }
+
+  .robotics-kpi{
+    border:1px solid var(--line);border-radius:6px;
+    background:var(--bg-elevated);padding:18px 20px;
+  }
+  .robotics-kpi strong{
+    display:block;font-family:'Space Grotesk',sans-serif;
+    font-size:14px;font-weight:600;margin-bottom:4px;
+  }
+  .robotics-kpi span{ font-size:13.5px;color:var(--text-muted); }
+</style>
+{% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="page-content">
+  <div class="wrap">
 
-  <style>
-    .robotics-hero {
-      overflow: hidden;
-      border-radius: 28px;
-      border: 1px solid #dfe5ef;
-      background: linear-gradient(135deg, #ffffff 0%, #f6f9fc 58%, #eef5fb 100%);
-    }
-
-    .robotics-video {
-      width: 100%;
-      border-radius: 22px;
-      border: 1px solid #dfe5ef;
-      background: #0d1b2a;
-      box-shadow: 0 24px 60px rgba(13, 27, 42, .16);
-    }
-
-    .robotics-visual {
-      border-radius: 24px;
-      border: 1px solid #dfe5ef;
-      background: #fff;
-      overflow: hidden;
-      box-shadow: 0 18px 45px rgba(13, 27, 42, .08);
-    }
-
-    .robotics-visual img {
-      width: 100%;
-      display: block;
-    }
-
-    .robotics-kpi {
-      border-radius: 20px;
-      border: 1px solid #dfe5ef;
-      background: #fff;
-      padding: 1.25rem;
-      height: 100%;
-    }
-
-    .robotics-kpi strong {
-      display: block;
-      font-size: 1rem;
-      margin-bottom: .35rem;
-    }
-  </style>
-
-  <section class="home-section mb-5">
-    <div class="robotics-hero shadow-sm p-4 p-lg-5">
-      <div class="row align-items-center g-5">
-        <div class="col-lg-6">
-          <div class="badge text-bg-light border mb-3">ICGS Robotics Lab · Nexo Operativo</div>
-
-          <h1 class="display-5 fw-bold mb-3">
-            Software y operaciones para robótica aplicada.
-          </h1>
-
-          <p class="lead text-secondary mb-4">
-            Convertimos robots comerciales en herramientas profesionales para inspección,
-            rondas operativas, captura de evidencias, informes e integración empresarial.
-          </p>
-
-          <div class="d-flex flex-wrap gap-2 mb-4">
-            <a class="btn site-btn-primary btn-lg" href="/contacto/">Solicitar reunión</a>
-          </div>
-
-          <div class="row g-3">
-            <div class="col-md-4">
+    <!-- Hero -->
+    <div class="page-section">
+      <div class="icgs-card" style="padding:36px 40px;">
+        <div class="robotics-hero">
+          <div>
+            <div class="eyebrow">ICGS Robotics Lab · Nexo Operativo</div>
+            <h1 style="font-size:clamp(28px,3.2vw,40px);margin-bottom:16px;">
+              Software y operaciones para robótica aplicada.
+            </h1>
+            <p style="font-size:17px;color:var(--text-muted);margin-bottom:28px;">
+              Convertimos robots comerciales en herramientas profesionales para inspección,
+              rondas operativas, captura de evidencias, informes e integración empresarial.
+            </p>
+            <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:32px;">
+              <a class="btn btn-primary" href="/contacto/">Solicitar reunión</a>
+            </div>
+            <div class="g3" style="gap:12px;">
               <div class="robotics-kpi">
                 <strong>Entrada inicial</strong>
-                <span class="text-secondary">Unitree Go2</span>
+                <span>Unitree Go2</span>
               </div>
-            </div>
-            <div class="col-md-4">
               <div class="robotics-kpi">
                 <strong>Fase futura</strong>
-                <span class="text-secondary">Unitree G1</span>
+                <span>Unitree G1</span>
               </div>
-            </div>
-            <div class="col-md-4">
               <div class="robotics-kpi">
                 <strong>Concepto</strong>
-                <span class="text-secondary">Nexo Operativo</span>
+                <span>Nexo Operativo</span>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="col-lg-6">
-          <video class="robotics-video" controls preload="metadata" poster="{% static 'media/robotics/Robotics_01_vision.png' %}">
-            <source src="{% static 'media/robotics/15.9-invideo-video_robotics.mp4' %}" type="video/mp4">
-            Tu navegador no soporta vídeo HTML5.
-          </video>
-
-          <div class="mt-3 text-lg-end">
-            <a class="btn btn-outline-dark"
-               href="{% static 'docs/ICGS_Robotics_Lab_presentacion_ejecutiva_v2.pdf' %}"
-               target="_blank" rel="noopener">
-              Ver dossier para inversores
-            </a>
+          <div>
+            <video class="robotics-video" controls preload="metadata"
+                   poster="{% static 'media/robotics/Robotics_01_vision.png' %}">
+              <source src="{% static 'media/robotics/15.9-invideo-video_robotics.mp4' %}" type="video/mp4">
+              Tu navegador no soporta vídeo HTML5.
+            </video>
+            <div style="margin-top:12px;text-align:right;">
+              <a class="btn btn-ghost"
+                 href="{% static 'docs/ICGS_Robotics_Lab_presentacion_ejecutiva_v2.pdf' %}"
+                 target="_blank" rel="noopener">
+                Ver dossier para inversores
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <section class="home-section mb-5">
-    <div class="home-section__head">
+    <!-- Visión del proyecto -->
+    <div class="page-section">
+      <div class="page-section-head">
+        <h2>Visión del proyecto</h2>
+        <p>Una iniciativa de software, operación y datos sobre robótica comercial.</p>
+      </div>
+      <div class="img-frame">
+        <img src="{% static 'media/robotics/Robotics_01_vision.png' %}" alt="ICGS Robotics Lab - Visión del proyecto">
+      </div>
+    </div>
+
+    <!-- Oportunidad de mercado -->
+    <div class="page-section">
+      <div class="page-section-head">
+        <h2>Oportunidad de mercado</h2>
+        <p>Entrada realista: inspección profesional y rondas operativas.</p>
+      </div>
+      <div class="img-frame">
+        <img src="{% static 'media/robotics/Robotics_02_oportunidad.png' %}" alt="ICGS Robotics Lab - Oportunidad de mercado">
+      </div>
+    </div>
+
+    <!-- Modelo de solución -->
+    <div class="page-section">
+      <div class="page-section-head">
+        <h2>Modelo de solución</h2>
+        <p>Robot, misión, teleoperación, evidencias, informes e integración SaaS.</p>
+      </div>
+      <div class="img-frame">
+        <img src="{% static 'media/robotics/Robotics_03_modelo_solucion.png' %}" alt="ICGS Robotics Lab - Modelo de solución">
+      </div>
+    </div>
+
+    <!-- CTA final -->
+    <div class="cta-box">
       <div>
-        <h2 class="h3 fw-bold mb-1">Visión del proyecto</h2>
-        <div class="text-secondary">Una iniciativa de software, operación y datos sobre robótica comercial.</div>
+        <h2>ICGS Robotics Lab está en fase de validación técnica y comercial</h2>
+        <p>Buscamos avanzar con pilotos, alianzas tecnológicas y colaboración estratégica.</p>
       </div>
+      <a class="btn btn-primary" href="/contacto/">Contactar</a>
     </div>
 
-    <div class="robotics-visual">
-      <img src="{% static 'media/robotics/Robotics_01_vision.png' %}" alt="ICGS Robotics Lab - Visión del proyecto">
-    </div>
-  </section>
-
-  <section class="home-section mb-5">
-    <div class="home-section__head">
-      <div>
-        <h2 class="h3 fw-bold mb-1">Oportunidad de mercado</h2>
-        <div class="text-secondary">Entrada realista: inspección profesional y rondas operativas.</div>
-      </div>
-    </div>
-
-    <div class="robotics-visual">
-      <img src="{% static 'media/robotics/Robotics_02_oportunidad.png' %}" alt="ICGS Robotics Lab - Oportunidad de mercado">
-    </div>
-  </section>
-
-  <section class="home-section mb-5">
-    <div class="home-section__head">
-      <div>
-        <h2 class="h3 fw-bold mb-1">Modelo de solución</h2>
-        <div class="text-secondary">Robot, misión, teleoperación, evidencias, informes e integración SaaS.</div>
-      </div>
-    </div>
-
-    <div class="robotics-visual">
-      <img src="{% static 'media/robotics/Robotics_03_modelo_solucion.png' %}" alt="ICGS Robotics Lab - Modelo de solución">
-    </div>
-  </section>
-
-  <section class="home-cta">
-    <div class="home-cta__box">
-      <div class="row align-items-center g-3">
-        <div class="col-lg-8">
-          <h2 class="h4 fw-bold mb-1">ICGS Robotics Lab está en fase de validación técnica y comercial</h2>
-          <div class="text-secondary">
-            Buscamos avanzar con pilotos, alianzas tecnológicas y colaboración estratégica.
-          </div>
-        </div>
-        <div class="col-lg-4 text-lg-end">
-          <a class="btn site-btn-primary btn-lg" href="/contacto/">Contactar</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
+  </div>
 </div>
 {% endblock %}

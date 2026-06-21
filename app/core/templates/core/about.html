@@ -1,25 +1,29 @@
 {% extends "base.html" %}
-{% block title %}Sobre ICGS · {{ settings.site_name|default:"ICGS" }}{% endblock %}
+
+{% block title %}Sobre ICGS{% endblock %}
 
 {% block content %}
-<div class="container">
-  <h1 class="h2 fw-bold mb-3">Sobre ICGS</h1>
-  <div class="row g-4">
-    <div class="col-lg-8">
-      <p class="text-secondary">
-        {{ settings.about_text|default:"ICGS es un entorno técnico orientado a construir soluciones estables: infraestructura, automatización y desarrollo." }}
-      </p>
-      <ul class="text-secondary">
-        <li>Arquitecturas Docker con proxy reverse (Caddy/Nginx)</li>
-        <li>Cloudflare Zero Trust / Tunnel</li>
-        <li>Django / Integraciones / Procesos</li>
-      </ul>
+<div class="page-content">
+  <div class="wrap">
+    <div class="page-head">
+      <h1>Sobre ICGS</h1>
     </div>
-    <div class="col-lg-4">
-      <div class="p-3 bg-white border rounded-4">
-        <div class="fw-semibold mb-2">Contacto</div>
-        <div class="text-secondary small">{{ settings.email|default:"ivan@icgs.es" }}</div>
-        <a class="btn btn-sm btn-dark mt-3" href="/contacto/">Escribir</a>
+
+    <div style="display:grid;grid-template-columns:1.6fr 1fr;gap:40px;align-items:start;">
+      <div>
+        <p style="color:var(--text-muted);margin-bottom:20px;">
+          {{ settings.about_text|default:"ICGS es un entorno técnico orientado a construir soluciones estables: infraestructura, automatización y desarrollo." }}
+        </p>
+        <ul class="feature-list" style="margin-top:0;">
+          <li>Arquitecturas Docker con proxy reverse (Caddy/Nginx)</li>
+          <li>Cloudflare Zero Trust / Tunnel</li>
+          <li>Django / Integraciones / Procesos</li>
+        </ul>
+      </div>
+      <div class="icgs-card">
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;margin-bottom:8px;">Contacto</div>
+        <div style="color:var(--text-muted);font-size:14px;">{{ settings.email|default:"ivan@icgs.es" }}</div>
+        <a class="btn btn-primary" href="/contacto/" style="margin-top:20px;">Escribir</a>
       </div>
     </div>
   </div>

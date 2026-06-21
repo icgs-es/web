@@ -1,26 +1,21 @@
 {% extends "base.html" %}
-{% block title %}Aviso legal · {{ settings.site_name|default:"ICGS" }}{% endblock %}
+
+{% block title %}Aviso legal · ICGS{% endblock %}
 
 {% block content %}
-<div class="container">
-  <h1 class="h3 fw-bold mb-3">Aviso legal</h1>
-
-  <p class="text-secondary">
-    Este sitio web es propiedad de {{ settings.site_name|default:"ICGS" }}.
-  </p>
-
-  <p class="text-secondary">
-    El contenido de esta web tiene carácter informativo y profesional.
-    No se garantiza la ausencia de errores ni la disponibilidad permanente del servicio.
-  </p>
-
-  <p class="text-secondary">
-    El titular no se responsabiliza del uso indebido de la información aquí publicada.
-  </p>
-
-  <p class="text-secondary">
-    Para cualquier consulta legal, puede contactar en
-    <a href="mailto:{{ settings.email|default:'ivan@icgs.es' }}">{{ settings.email|default:"ivan@icgs.es" }}</a>.
-  </p>
+<div class="page-content">
+  <div class="wrap">
+    <div class="page-head">
+      <h1>Aviso legal</h1>
+    </div>
+    <div class="prose">
+      <p>Este sitio web es propiedad de {{ settings.site_name|default:"ICGS" }}.</p>
+      <p>El contenido de esta web tiene carácter informativo y profesional.
+        No se garantiza la ausencia de errores ni la disponibilidad permanente del servicio.</p>
+      <p>El titular no se responsabiliza del uso indebido de la información aquí publicada.</p>
+      <p>Para cualquier consulta legal, puede contactar en
+        <a href="mailto:{{ settings.email|default:'ivan@icgs.es' }}">{{ settings.email|default:"ivan@icgs.es" }}</a>.</p>
+    </div>
+  </div>
 </div>
 {% endblock %}
