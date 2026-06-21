@@ -10,6 +10,8 @@ def home(request):
     return render(request, "core/home.html", {
         "services": Service.objects.filter(is_active=True).order_by("order")[:6],
         "projects": Project.objects.filter(is_active=True).order_by("order")[:6],
+        "enviado": request.GET.get("enviado") == "1",
+        "form_error": request.GET.get("error") == "1",
     })
 
 
@@ -33,43 +35,28 @@ def contact(request):
     if request.method == "POST":
         name = request.POST.get("name", "").strip()
         email = request.POST.get("email", "").strip()
-        company = request.POST.get("company", "").strip()
         message = request.POST.get("message", "").strip()
 
         if not name or not email or not message:
-            messages.error(request, "Rellena nombre, email y mensaje.")
-        else:
-            Lead.objects.create(
-                name=name,
-                email=email,
-                company=company,
-                message=message,
-                source="icgs.es",
-            )
-            # Email de notificación (si está configurado)
-            try:
-                subject = f"[ICGS] Nuevo contacto: {name}"
-                body = (
+            return redirect("/?error=1#contacto")
+
+        Lead.objects.create(name=name, email=email, message=message)
+
+        try:
+            send_mail(
+                subject=f"[ICGS] Nuevo contacto: {name}",
+                message=(
                     f"Nuevo mensaje desde icgs.es\n\n"
-                    f"Nombre: {name}\n"
-                    f"Email: {email}\n"
-                    f"Empresa: {company or '-'}\n\n"
-                    f"Mensaje:\n{message}\n"
-                )
+                    f"Nombre: {name}\nEmail: {email}\n\nMensaje:\n{message}\n"
+                ),
+                from_email=getattr(settings, "DEFAULT_FROM_EMAIL", None) or "no-reply@icgs.es",
+                recipient_list=[getattr(settings, "CONTACT_NOTIFY_EMAIL", "ivan@icgs.es")],
+                fail_silently=True,
+            )
+        except Exception:
+            pass
 
-                send_mail(
-                    subject=subject,
-                    message=body,
-                    from_email=getattr(settings, "DEFAULT_FROM_EMAIL", None) or "no-reply@icgs.es",
-                    recipient_list=[getattr(settings, "CONTACT_NOTIFY_EMAIL", "ivan@icgs.es")],
-                    fail_silently=False,
-                )
-            except Exception:
-                # No bloqueamos el envío del formulario si falla el correo
-                pass
-
-            messages.success(request, "Mensaje enviado. Te responderé lo antes posible.")
-            return redirect("contact")
+        return redirect("/?enviado=1#contacto")
 
     return render(request, "core/contact.html")
 

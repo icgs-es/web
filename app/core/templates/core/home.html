@@ -336,6 +336,49 @@
   .foot-links{display:flex;gap:22px;flex-wrap:wrap;}
   .foot-links a:hover{color:var(--text-muted);}
 
+  /* ---------- CONTACT FORM ---------- */
+  .contact-form{
+    max-width:520px;margin:32px auto 0;
+    display:flex;flex-direction:column;gap:18px;
+    text-align:left;
+  }
+  .contact-form .field{display:flex;flex-direction:column;gap:6px;}
+  .contact-form label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;letter-spacing:.06em;
+    color:var(--text-muted);
+  }
+  .contact-form input,
+  .contact-form textarea{
+    background:var(--bg-elevated);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:11px 14px;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:15px;color:var(--text);
+    outline:none;
+    transition:border-color .15s ease;
+    width:100%;
+  }
+  .contact-form input:focus,
+  .contact-form textarea:focus{border-color:var(--text-dim);}
+  .contact-form textarea{resize:vertical;min-height:110px;}
+  .contact-form .submit-row{text-align:center;margin-top:6px;}
+  .contact-ok{
+    background:var(--sage-dim);border:1px solid var(--sage);
+    border-radius:var(--radius);padding:16px 24px;
+    color:var(--sage);font-size:15px;
+    max-width:520px;margin:24px auto 0;
+    text-align:center;
+  }
+  .contact-error{
+    background:var(--clay-dim);border:1px solid var(--clay);
+    border-radius:var(--radius);padding:16px 24px;
+    color:var(--clay-bright);font-size:15px;
+    max-width:520px;margin:0 auto 18px;
+    text-align:center;
+  }
+
   /* reveal */
   .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease;}
   .reveal.in{opacity:1;transform:none;}
@@ -374,7 +417,7 @@
         <a href="#proyectos" class="btn btn-ghost">Ver un caso real →</a>
       </div>
       <div class="stack-tags">
-        <span>Docker</span><span>Cloudflare</span><span>Caddy</span><span>Django</span><span>Odoo</span>
+        <span>Docker</span><span>Cloudflare</span><span>Caddy</span><span>Django</span><span>ORDIX</span>
       </div>
     </div>
 
@@ -511,15 +554,38 @@
   </div>
 </section>
 
-<!-- ===================== CTA ===================== -->
+<!-- ===================== CONTACTO ===================== -->
 <section class="cta" id="contacto">
   <div class="wrap">
     <div class="eyebrow" style="justify-content:center;">¿Hablamos?</div>
     <h2>Cuéntanos cómo trabajas hoy.</h2>
     <p>Te decimos, sin rodeos, qué se puede ordenar y qué no merece la pena tocar todavía.</p>
-    <div class="hero-actions">
-      <a href="/contacto/" class="btn btn-primary">Solicitar propuesta</a>
-    </div>
+
+    {% if enviado %}
+    <div class="contact-ok">Mensaje recibido. Te respondo lo antes posible.</div>
+    {% else %}
+    {% if form_error %}
+    <div class="contact-error">Rellena nombre, email y mensaje antes de enviar.</div>
+    {% endif %}
+    <form method="post" action="{% url 'contact' %}" class="contact-form">
+      {% csrf_token %}
+      <div class="field">
+        <label for="f-name">Nombre</label>
+        <input type="text" id="f-name" name="name" required placeholder="Tu nombre">
+      </div>
+      <div class="field">
+        <label for="f-email">Email</label>
+        <input type="email" id="f-email" name="email" required placeholder="tu@email.com">
+      </div>
+      <div class="field">
+        <label for="f-message">Mensaje</label>
+        <textarea id="f-message" name="message" rows="4" required placeholder="Cuéntanos qué necesitas..."></textarea>
+      </div>
+      <div class="submit-row">
+        <button type="submit" class="btn btn-primary">Enviar mensaje →</button>
+      </div>
+    </form>
+    {% endif %}
   </div>
 </section>
 
