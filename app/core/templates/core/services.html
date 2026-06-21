@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Servicios · {{ settings.site_name|default:"ICGS" }}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1 class="h2 fw-bold mb-3">Servicios</h1>
+  <p class="text-secondary mb-4">Soluciones prácticas orientadas a resultados.</p>
+
+  <div class="row g-3">
+    {% for s in services %}
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h2 class="h5 fw-semibold">{{ s.title }}</h2>
+            <p class="text-secondary mb-0">{{ s.summary }}</p>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="col-12">
+        <div class="alert alert-light border">Aún no hay servicios cargados.</div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

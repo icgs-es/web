@@ -1,0 +1,27 @@
+# Entorno y secretos
+infra/.env
+infra/.env.*
+!infra/.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Django
+*.log
+db.sqlite3
+
+# Vídeos y binarios pesados
+app/core/static/media/**/*.mp4
+app/core/static/media/**/*.mov
+app/core/static/media/**/*.webm
+
+# Backups puntuales
+*.bak
+*.bak_*
+
+# Editores
+.vscode/
+.idea/
+*.swp

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Sobre ICGS · {{ settings.site_name|default:"ICGS" }}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1 class="h2 fw-bold mb-3">Sobre ICGS</h1>
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <p class="text-secondary">
+        {{ settings.about_text|default:"ICGS es un entorno técnico orientado a construir soluciones estables: infraestructura, automatización y desarrollo." }}
+      </p>
+      <ul class="text-secondary">
+        <li>Arquitecturas Docker con proxy reverse (Caddy/Nginx)</li>
+        <li>Cloudflare Zero Trust / Tunnel</li>
+        <li>Django / Integraciones / Procesos</li>
+      </ul>
+    </div>
+    <div class="col-lg-4">
+      <div class="p-3 bg-white border rounded-4">
+        <div class="fw-semibold mb-2">Contacto</div>
+        <div class="text-secondary small">{{ settings.email|default:"ivan@icgs.es" }}</div>
+        <a class="btn btn-sm btn-dark mt-3" href="/contacto/">Escribir</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

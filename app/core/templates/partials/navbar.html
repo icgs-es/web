@@ -1,0 +1,58 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg site-navbar sticky-top">
+  <div class="container">
+    <a class="navbar-brand site-brand" href="/" aria-label="ICGS inicio">
+      <img
+        src="{% static 'img/icgs/logo-icgs-horizontal.jpg' %}?v=2"
+        alt="ICGS"
+        class="site-brand-logo"
+      >
+    </a>
+
+    <button
+      class="navbar-toggler site-navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#mainNav"
+      aria-controls="mainNav"
+      aria-expanded="false"
+      aria-label="Abrir menú"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    {% with p=request.path %}
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center site-nav-list">
+        <li class="nav-item">
+          <a class="nav-link site-nav-link {% if p == '/' %}active{% endif %}"
+             {% if p == '/' %}aria-current="page"{% endif %}
+             href="/">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link site-nav-link {% if '/servicios/' in p %}active{% endif %}"
+             href="/servicios/">Servicios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link site-nav-link {% if '/proyectos/' in p %}active{% endif %}"
+             href="/proyectos/">Proyectos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link site-nav-link {% if '/sobre-icgs/' in p %}active{% endif %}"
+             href="/sobre-icgs/">Sobre ICGS</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link site-nav-link {% if '/contacto/' in p %}active{% endif %}"
+             href="/contacto/">Contacto</a>
+        </li>
+
+        <li class="nav-item site-nav-cta">
+          <a class="btn site-btn-primary" href="{{ settings.primary_cta_url|default:'/contacto/' }}">
+            {{ settings.primary_cta_text|default:'Solicitar información' }}
+          </a>
+        </li>
+      </ul>
+    </div>
+    {% endwith %}
+  </div>
+</nav>

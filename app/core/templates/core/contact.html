@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Contacto · {{ settings.site_name|default:"ICGS" }}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1 class="h2 fw-bold mb-3">Contacto</h1>
+  <p class="text-secondary mb-4">
+    Escríbeme y te respondo con una propuesta clara.
+  </p>
+
+  <div class="row g-4">
+    <div class="col-lg-6">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <div class="fw-semibold">Email</div>
+          <div class="text-secondary">{{ settings.email|default:"ivan@icgs.es" }}</div>
+          <a class="btn btn-dark mt-3" href="mailto:{{ settings.email|default:'ivan@icgs.es' }}">Enviar correo</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <div class="fw-semibold">Llamada / reunión</div>
+          <div class="text-secondary">Si prefieres, lo coordinamos por email.</div>
+          <a class="btn btn-outline-dark mt-3" href="{{ settings.primary_cta_url|default:'/contacto/' }}">Solicitar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

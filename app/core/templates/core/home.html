@@ -1,0 +1,561 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICGS · Infraestructura y automatización para Los Pedroches</title>
+<link rel="icon" type="image/png" href="{% static 'img/icgs/icgs-favicon.png' %}">
+<!--
+  NOTA PARA IVAN:
+  El caso "Portal INTASA" se presenta aquí ANONIMIZADO ("una constructora")
+  porque no hay confirmación de que el cliente INTASA autorice usar su nombre en marketing
+  público. En cuanto tengas su visto bueno, sustituye los textos marcados con
+  [CASO-ANON] por el nombre real y, si quieren, su logo.
+  La ubicación (Pozoblanco / Los Pedroches) aparece solo en el pie de página,
+  como dato de sede, no como argumento de venta — decisión explícita de Ivan.
+  Stack sugerido para integrar: esto es HTML+CSS+JS estático, listo para convertir
+  en plantillas Django (base.html + secciones) o servir tal cual desde Caddy.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f3f4f1;
+    --bg-elevated:#ffffff;
+    --bg-elevated-2:#f7f8f5;
+    --line:#dfe2dd;
+    --line-soft:#eaece7;
+    --text:#1c211d;
+    --text-muted:#5a625b;
+    --text-dim:#82897f;
+    --clay:#b85a33;
+    --clay-bright:#9c4a29;
+    --clay-dim:rgba(184,90,51,0.10);
+    --sage:#5f7050;
+    --sage-dim:rgba(95,112,80,0.12);
+    --radius:3px;
+    --maxw:1180px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--clay);color:#ffffff;}
+
+  h1,h2,h3,h4{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    line-height:1.12;
+    letter-spacing:-0.01em;
+    color:var(--text);
+  }
+
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:0.04em;
+  }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--clay-bright);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:7px;height:7px;border-radius:50%;
+    background:var(--clay);
+    flex-shrink:0;
+  }
+
+  a{color:inherit;text-decoration:none;}
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(243,244,241,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex;align-items:center;justify-content:space-between;
+    height:68px;
+  }
+  .logo{
+    display:flex;align-items:center;
+  }
+  .logo-img{height:40px;width:auto;display:block;}
+  .logo-text{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:23px;
+    letter-spacing:-0.01em;
+    color:#e79815;
+    margin-left:9px;
+  }
+  .nav-links{
+    display:flex;align-items:center;gap:36px;
+    font-size:14.5px;color:var(--text-muted);
+  }
+  .nav-links a{transition:color .15s ease;}
+  .nav-links a:hover{color:var(--text);}
+  .btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13.5px;
+    letter-spacing:0.02em;
+    padding:10px 20px;
+    border-radius:var(--radius);
+    display:inline-flex;align-items:center;gap:8px;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:all .15s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{background:var(--clay);color:#ffffff;font-weight:500;}
+  .btn-primary:hover{background:var(--clay-bright);}
+  .btn-ghost{border-color:var(--line);color:var(--text);}
+  .btn-ghost:hover{border-color:var(--text-dim);background:var(--bg-elevated);}
+  .nav-cta{display:none;}
+  @media(min-width:880px){.nav-cta{display:inline-flex;}}
+  .nav-links{display:none;}
+  @media(min-width:880px){.nav-links{display:flex;}}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:96px 0 80px;
+    border-bottom:1px solid var(--line);
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1fr;gap:64px;
+    align-items:center;
+  }
+  @media(min-width:920px){
+    .hero-grid{grid-template-columns:1.05fr 0.95fr;}
+  }
+  .hero h1{
+    font-size:clamp(34px,4.6vw,54px);
+    margin-bottom:24px;
+  }
+  .hero h1 em{
+    font-style:normal;color:var(--clay-bright);
+  }
+  .hero p.lead{
+    font-size:18px;
+    color:var(--text-muted);
+    max-width:480px;
+    margin-bottom:34px;
+  }
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;}
+  .hero-actions .btn{padding:13px 24px;font-size:14px;}
+
+  .stack-tags{
+    margin-top:40px;
+    display:flex;gap:10px;flex-wrap:wrap;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;color:var(--text-dim);
+  }
+  .stack-tags span{
+    border:1px solid var(--line);
+    padding:5px 10px;border-radius:var(--radius);
+  }
+
+  /* ---------- PIPELINE DIAGRAM ---------- */
+  .pipeline-card{
+    background:var(--bg-elevated);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:28px 22px 24px;
+  }
+  .pipeline-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;color:var(--text-dim);
+    letter-spacing:0.1em;
+    margin-bottom:22px;
+    display:flex;justify-content:space-between;
+  }
+  .pipeline-label .live{color:var(--sage);display:flex;align-items:center;gap:6px;}
+  .pulse-dot{
+    width:6px;height:6px;border-radius:50%;background:var(--sage);
+    animation:pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.25;}}
+
+  .pipeline{
+    display:flex;flex-direction:column;gap:0;
+  }
+  .pnode{
+    display:flex;align-items:center;gap:14px;
+    padding:13px 4px;
+    position:relative;
+  }
+  .pnode:not(:last-child)::after{
+    content:"";
+    position:absolute;
+    left:13px;top:42px;
+    width:1px;height:22px;
+    background:var(--line);
+  }
+  .pnode .idx{
+    width:26px;height:26px;border-radius:50%;
+    border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;color:var(--text-dim);
+    flex-shrink:0;
+    background:var(--bg-elevated-2);
+  }
+  .pnode.active .idx{border-color:var(--clay);color:var(--clay-bright);}
+  .pnode .label{font-size:14.5px;color:var(--text);}
+  .pnode .sub{font-size:12.5px;color:var(--text-dim);margin-top:1px;}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:84px 0;border-bottom:1px solid var(--line);}
+  .section-head{max-width:620px;margin-bottom:48px;}
+  .section-head h2{font-size:clamp(26px,3vw,34px);}
+
+  /* ---------- PROOF / CASE STUDY ---------- */
+  .proof{background:var(--bg-elevated);}
+  .proof-grid{
+    display:grid;grid-template-columns:1fr;gap:40px;
+  }
+  @media(min-width:900px){.proof-grid{grid-template-columns:0.95fr 1.05fr;}}
+  .proof-card{
+    border:1px solid var(--line);
+    background:var(--bg);
+    border-radius:6px;
+    padding:30px;
+  }
+  .badge{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;letter-spacing:.08em;
+    padding:4px 9px;border-radius:20px;
+    display:inline-flex;align-items:center;gap:6px;
+  }
+  .badge-live{background:var(--sage-dim);color:var(--sage);}
+  .badge-dev{background:var(--clay-dim);color:var(--clay-bright);}
+  .badge .d{width:5px;height:5px;border-radius:50%;background:currentColor;}
+
+  .feature-list{margin-top:22px;display:flex;flex-direction:column;gap:13px;}
+  .feature-list li{
+    list-style:none;display:flex;gap:11px;align-items:flex-start;
+    font-size:14.5px;color:var(--text-muted);
+  }
+  .feature-list li::before{
+    content:"";flex-shrink:0;width:5px;height:5px;border-radius:50%;
+    background:var(--clay);margin-top:8px;
+  }
+
+  .proof-quote{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:22px;line-height:1.45;font-weight:500;
+    color:var(--text);margin-bottom:20px;
+  }
+  .proof-quote .hl{color:var(--clay-bright);}
+
+  /* ---------- SERVICIOS ---------- */
+  .cards-4{
+    display:grid;grid-template-columns:1fr;gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:6px;overflow:hidden;
+  }
+  @media(min-width:680px){.cards-4{grid-template-columns:1fr 1fr;}}
+  @media(min-width:980px){.cards-4{grid-template-columns:repeat(4,1fr);}}
+  .scard{
+    background:var(--bg);
+    padding:30px 24px;
+  }
+  .scard .num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;color:var(--text-dim);margin-bottom:18px;
+  }
+  .scard h3{font-size:17px;margin-bottom:10px;}
+  .scard p{font-size:14px;color:var(--text-muted);}
+
+  /* ---------- SOLUCIONES ---------- */
+  .sol-grid{display:grid;grid-template-columns:1fr;gap:20px;}
+  @media(min-width:880px){.sol-grid{grid-template-columns:repeat(3,1fr);}}
+  .sol-card{
+    border:1px solid var(--line);border-radius:6px;
+    padding:26px;display:flex;flex-direction:column;
+    background:var(--bg-elevated);
+    transition:border-color .15s ease;
+  }
+  .sol-card:hover{border-color:var(--text-dim);}
+  .sol-icon{width:42px;height:auto;display:block;margin-bottom:16px;}
+  .sol-cat{font-family:'IBM Plex Mono', monospace;font-size:11.5px;color:var(--text-dim);margin-bottom:14px;}
+  .sol-card h3{font-size:19px;margin-bottom:4px;}
+  .sol-card .badge{margin:10px 0 14px;align-self:flex-start;}
+  .sol-card p{font-size:14px;color:var(--text-muted);flex-grow:1;}
+  .sol-card .sol-link{
+    margin-top:18px;font-family:'IBM Plex Mono', monospace;font-size:13px;
+    color:var(--clay-bright);display:flex;align-items:center;gap:6px;
+    width:fit-content;
+  }
+  .sol-card .sol-link:hover{text-decoration:underline;}
+
+  /* ---------- CTA ---------- */
+  .cta{
+    border-bottom:none;
+    text-align:center;
+    padding:96px 0 100px;
+  }
+  .cta h2{font-size:clamp(30px,4vw,44px);margin-bottom:16px;}
+  .cta p{color:var(--text-muted);font-size:16.5px;max-width:480px;margin:0 auto 36px;}
+  .cta .hero-actions{justify-content:center;}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:44px 0;}
+  .foot-grid{
+    display:flex;flex-direction:column;gap:24px;
+    font-size:13.5px;color:var(--text-dim);
+  }
+  @media(min-width:700px){.foot-grid{flex-direction:row;justify-content:space-between;align-items:center;}}
+  .foot-links{display:flex;gap:22px;flex-wrap:wrap;}
+  .foot-links a:hover{color:var(--text-muted);}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media(prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    .pulse-dot{animation:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="/" class="logo">
+      <img src="{% static 'img/icgs/icgs-cubo.png' %}" alt="ICGS" class="logo-img"><span class="logo-text">ICGS</span>
+    </a>
+    <div class="nav-links">
+      <a href="#servicios">Servicios</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#soluciones">Soluciones</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+    <a href="#contacto" class="btn btn-primary nav-cta">Solicitar propuesta</a>
+  </nav>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" style="border-bottom:1px solid var(--line);padding-bottom:80px;">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">ICGS · Infraestructura y automatización para empresas</div>
+      <h1>Infraestructura y automatización para negocios que <em>no pueden parar.</em></h1>
+      <p class="lead">Diseñamos, desplegamos y mantenemos los sistemas que mueven tu operación día a día: control horario, compras, almacén, planificación y datos — todo en un mismo sitio, funcionando de verdad.</p>
+      <div class="hero-actions">
+        <a href="#contacto" class="btn btn-primary">Solicitar propuesta</a>
+        <a href="#proyectos" class="btn btn-ghost">Ver un caso real →</a>
+      </div>
+      <div class="stack-tags">
+        <span>Docker</span><span>Cloudflare</span><span>Caddy</span><span>Django</span><span>Odoo</span>
+      </div>
+    </div>
+
+    <div class="pipeline-card">
+      <div class="pipeline-label">
+        <span>FLUJO REAL · COMPRAS A OBRA</span>
+        <span class="live"><span class="pulse-dot"></span>EN PRODUCCIÓN</span>
+      </div>
+      <div class="pipeline">
+        <div class="pnode active">
+          <div class="idx">1</div>
+          <div><div class="label">Factura recibida</div><div class="sub">PDF de proveedor</div></div>
+        </div>
+        <div class="pnode active">
+          <div class="idx">2</div>
+          <div><div class="label">Lectura OCR</div><div class="sub">plantilla por proveedor</div></div>
+        </div>
+        <div class="pnode">
+          <div class="idx">3</div>
+          <div><div class="label">Entrada en almacén</div><div class="sub">sin duplicar stock</div></div>
+        </div>
+        <div class="pnode">
+          <div class="idx">4</div>
+          <div><div class="label">Asignación a partida</div><div class="sub">tarea / obra</div></div>
+        </div>
+        <div class="pnode">
+          <div class="idx">5</div>
+          <div><div class="label">Informe disponible</div><div class="sub">control y trazabilidad</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PRUEBA / CASO REAL ===================== -->
+<section class="proof" id="proyectos">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Caso real · en uso diario</div>
+      <h2>No es una maqueta. Es lo que usa cada día una constructora real.</h2>
+    </div>
+
+    <div class="proof-grid reveal">
+      <div class="proof-card">
+        <span class="badge badge-live"><span class="d"></span>Beta comercial</span>
+        <p class="proof-quote" style="margin-top:20px;">Una plataforma de gestión de obra que <span class="hl">lee facturas, controla el almacén</span> y avisa cuando algo no cuadra — sin hojas de cálculo paralelas.</p>
+        <p style="color:var(--text-muted);font-size:14.5px;">Desarrollada e implantada por ICGS para una constructora. <!-- [CASO-ANON] --> En producción, con uso operativo real desde compras hasta cierre de partida.</p>
+      </div>
+
+      <div class="proof-card">
+        <div class="eyebrow" style="margin-bottom:18px;">Qué resuelve</div>
+        <ul class="feature-list">
+          <li>Control horario, agenda de equipo y comunicaciones centralizadas</li>
+          <li>CRM y seguimiento comercial</li>
+          <li>Gestión documental y de activos por proyecto</li>
+          <li>Planificación de obra y sincronización con sistemas ya existentes</li>
+          <li>Reconocimiento automático de facturas por proveedor (OCR)</li>
+          <li>Trazabilidad de almacén: qué entra, qué sale, a qué partida va</li>
+          <li>Control de albaranes para evitar duplicar stock o pagar dos veces</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SERVICIOS ===================== -->
+<section id="servicios">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Servicios</div>
+      <h2>Tecnología aplicada, no genérica.</h2>
+    </div>
+
+    <div class="cards-4 reveal">
+      <div class="scard">
+        <div class="num mono">01</div>
+        <h3>Infraestructura y despliegue</h3>
+        <p>Entornos estables con Docker, Cloudflare, Caddy y servidores Linux. Puestos en marcha y mantenidos, sin sorpresas a mitad de mes.</p>
+      </div>
+      <div class="scard">
+        <div class="num mono">02</div>
+        <h3>Desarrollo de aplicaciones</h3>
+        <p>Software a medida y portales web pensados para el trabajo real de cada equipo, no para una demo bonita.</p>
+      </div>
+      <div class="scard">
+        <div class="num mono">03</div>
+        <h3>Automatización e integraciones</h3>
+        <p>Conectamos lo que ya usas para que deje de duplicar trabajo: facturas, almacén, tareas, comunicaciones.</p>
+      </div>
+      <div class="scard">
+        <div class="num mono">04</div>
+        <h3>IA aplicada al negocio</h3>
+        <p>Clasificación, lectura de documentos y apoyo operativo aplicados a un proceso concreto, no como adorno.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SOLUCIONES PROPIAS ===================== -->
+<section id="soluciones" style="background:var(--bg-elevated);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Soluciones propias</div>
+      <h2>Un mismo motor operativo. Distinta piel según el negocio.</h2>
+    </div>
+
+    <div class="sol-grid reveal">
+      <div class="sol-card">
+        <img src="{% static 'img/icgs/ordix-mark.png' %}" alt="ORDIX" class="sol-icon">
+        <div class="sol-cat">SaaS · Núcleo operativo</div>
+        <h3>ORDIX CORE</h3>
+        <span class="badge badge-dev"><span class="d"></span>En desarrollo activo</span>
+        <p>El sistema operativo modular para pymes que da forma a cada implantación: agenda, archivos, comunicaciones y contactos en una única base. Sus primeros módulos ya están validados en producción real.</p>
+        <a href="https://icgs.es/soluciones/ordix/" class="sol-link">Ver ORDIX →</a>
+      </div>
+
+      <div class="sol-card">
+        <img src="{% static 'img/icgs/sooi-icono.png' %}" alt="SOOI" class="sol-icon">
+        <div class="sol-cat">Inmobiliario · Oportunidades</div>
+        <h3>SOOI</h3>
+        <span class="badge badge-live"><span class="d"></span>En producción</span>
+        <p>Sistema Operativo de Oportunidades Inmobiliarias. Organiza captaciones, oportunidades, tareas, alertas y seguimiento comercial con exploración asistida por IA.</p>
+        <a href="https://sooi.io" class="sol-link">Ver SOOI →</a>
+      </div>
+
+      <div class="sol-card">
+        <div class="sol-cat">Robótica aplicada · Operaciones</div>
+        <h3>ICGS Robotics Lab</h3>
+        <span class="badge badge-dev"><span class="d"></span>MVP en curso</span>
+        <p>Capa propia de misión, teleoperación y evidencias sobre robots comerciales como Unitree Go2. Primer caso de uso: inspección supervisada con informe automático.</p>
+        <a href="https://icgs.es/soluciones/robotics-lab/" class="sol-link">Ver Robotics Lab →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA ===================== -->
+<section class="cta" id="contacto">
+  <div class="wrap">
+    <div class="eyebrow" style="justify-content:center;">¿Hablamos?</div>
+    <h2>Cuéntanos cómo trabajas hoy.</h2>
+    <p>Te decimos, sin rodeos, qué se puede ordenar y qué no merece la pena tocar todavía.</p>
+    <div class="hero-actions">
+      <a href="/contacto/" class="btn btn-primary">Solicitar propuesta</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>© 2026 ICGS Gestión &amp; Servicios S.L. · Pozoblanco (Los Pedroches), Córdoba</div>
+    <div class="foot-links">
+      <a href="#servicios">Servicios</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#soluciones">Soluciones</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const els = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    els.forEach(el => io.observe(el));
+
+    // sequential activation of pipeline nodes
+    const nodes = document.querySelectorAll('.pnode');
+    let i = 0;
+    setInterval(() => {
+      nodes.forEach(n => n.classList.remove('active'));
+      nodes[i % nodes.length].classList.add('active');
+      i++;
+    }, 1400);
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+  }
+</script>
+
+</body>
+</html>

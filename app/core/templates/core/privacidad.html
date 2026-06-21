@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Política de privacidad · {{ settings.site_name|default:"ICGS" }}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1 class="h3 fw-bold mb-3">Política de privacidad</h1>
+
+  <p class="text-secondary">
+    En {{ settings.site_name|default:"ICGS" }} respetamos y protegemos los datos personales de nuestros usuarios.
+  </p>
+
+  <h2 class="h5 fw-semibold mt-4">Datos recogidos</h2>
+  <p class="text-secondary">
+    Este sitio web no recoge datos personales sin el consentimiento del usuario.
+    En caso de contacto por correo electrónico, los datos se utilizarán únicamente para responder a la solicitud.
+  </p>
+
+  <h2 class="h5 fw-semibold mt-4">Finalidad</h2>
+  <p class="text-secondary">
+    Los datos facilitados se utilizan exclusivamente para comunicaciones profesionales relacionadas con los servicios ofrecidos.
+  </p>
+
+  <h2 class="h5 fw-semibold mt-4">Derechos</h2>
+  <p class="text-secondary">
+    El usuario puede solicitar el acceso, rectificación o eliminación de sus datos escribiendo a
+    <a href="mailto:{{ settings.email|default:'ivan@icgs.es' }}">{{ settings.email|default:"ivan@icgs.es" }}</a>.
+  </p>
+</div>
+{% endblock %}
