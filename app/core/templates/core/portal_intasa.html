@@ -14,13 +14,23 @@
   }
   .gallery-item{
     border:1px solid var(--line);border-radius:6px;overflow:hidden;
-    background:var(--bg-elevated);
+    background:var(--bg-elevated);cursor:pointer;
   }
-  .gallery-item img{width:100%;display:block;aspect-ratio:16/10;object-fit:cover;}
+  .gallery-item img{width:100%;display:block;aspect-ratio:16/10;object-fit:cover;transition:opacity .15s;}
+  .gallery-item:hover img{opacity:.82;}
   .gallery-caption{
     font-family:'IBM Plex Mono',monospace;font-size:11.5px;
     color:var(--text-dim);padding:10px 14px;
   }
+  /* lightbox */
+  #lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);
+    z-index:9000;align-items:center;justify-content:center;cursor:zoom-out;}
+  #lb.open{display:flex;}
+  #lb img{max-width:94vw;max-height:94vh;object-fit:contain;border-radius:4px;
+    box-shadow:0 8px 48px rgba(0,0,0,.6);cursor:default;}
+  #lb-caption{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);
+    font-family:'IBM Plex Mono',monospace;font-size:12px;color:rgba(255,255,255,.7);
+    pointer-events:none;}
 </style>
 {% endblock %}
 
@@ -141,7 +151,7 @@
       </div>
       <div class="gallery-grid">
         {% for s in screenshots %}
-        <div class="gallery-item">
+        <div class="gallery-item" data-full="{{ s.image.url }}" data-caption="{{ s.caption }}">
           <img src="{{ s.image.url }}" alt="{{ s.caption }}" loading="lazy">
           {% if s.caption %}<div class="gallery-caption">{{ s.caption }}</div>{% endif %}
         </div>
@@ -161,4 +171,31 @@
 
   </div>
 </div>
+
+<div id="lb"><img id="lb-img" src="" alt=""><span id="lb-caption"></span></div>
+
+<script>
+(function(){
+  var lb = document.getElementById('lb');
+  var lbImg = document.getElementById('lb-img');
+  var lbCap = document.getElementById('lb-caption');
+
+  document.querySelectorAll('.gallery-item').forEach(function(item){
+    item.addEventListener('click', function(){
+      lbImg.src = item.dataset.full;
+      lbImg.alt = item.dataset.caption || '';
+      lbCap.textContent = item.dataset.caption || '';
+      lb.classList.add('open');
+    });
+  });
+
+  lb.addEventListener('click', function(e){
+    if(e.target !== lbImg) lb.classList.remove('open');
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') lb.classList.remove('open');
+  });
+})();
+</script>
 {% endblock %}
