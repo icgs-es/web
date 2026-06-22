@@ -1,31 +1,85 @@
 {% extends "base.html" %}
 
-{% block title %}Sobre ICGS{% endblock %}
+{% block title %}Sobre ICGS · Infraestructura real{% endblock %}
 
 {% block content %}
 <div class="page-content">
   <div class="wrap">
-    <div class="page-head">
-      <h1>Sobre ICGS</h1>
+
+    <!-- Hero -->
+    <div class="page-section">
+      <div class="eyebrow">SOBRE ICGS</div>
+      <h1 style="font-size:clamp(28px,3.2vw,40px);margin-bottom:16px;">
+        Infraestructura real, no promesas de innovación.
+      </h1>
+      <p style="font-size:17px;color:var(--text-muted);max-width:680px;">
+        ICGS Gestión &amp; Servicios S.L. es una empresa de infraestructura, automatización y desarrollo de software,
+        con sede en Pozoblanco (Los Pedroches), Córdoba. Construimos los sistemas que las empresas usan cada día —
+        no demos, no prototipos que se quedan en una presentación.
+      </p>
     </div>
 
-    <div style="display:grid;grid-template-columns:1.6fr 1fr;gap:40px;align-items:start;">
-      <div>
-        <p style="color:var(--text-muted);margin-bottom:20px;">
-          {{ settings.about_text|default:"ICGS es un entorno técnico orientado a construir soluciones estables: infraestructura, automatización y desarrollo." }}
-        </p>
-        <ul class="feature-list" style="margin-top:0;">
-          <li>Arquitecturas Docker con proxy reverse (Caddy/Nginx)</li>
-          <li>Cloudflare Zero Trust / Tunnel</li>
-          <li>Django / Integraciones / Procesos</li>
-        </ul>
+    <!-- Cómo trabajamos -->
+    <div class="page-section">
+      <div class="page-section-head">
+        <h2>Cómo trabajamos</h2>
       </div>
-      <div class="icgs-card">
-        <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;margin-bottom:8px;">Contacto</div>
-        <div style="color:var(--text-muted);font-size:14px;">{{ settings.email|default:"ivan@icgs.es" }}</div>
-        <a class="btn btn-primary" href="/contacto/" style="margin-top:20px;">Escribir</a>
+      <div class="icgs-card" style="padding:30px 36px;max-width:720px;">
+        <p style="font-size:15.5px;color:var(--text-muted);margin:0;line-height:1.7;">
+          No vendemos tecnología por sí misma. Antes de proponer nada, miramos cómo trabaja una empresa hoy —
+          con sus hojas de cálculo, sus carpetas compartidas, su memoria — y diseñamos lo que de verdad hace
+          falta para ordenarlo. Eso es lo que hay detrás de ORDIX CORE, Portal INTASA, SOOI e ICGS Robotics Lab:
+          herramientas que nacieron de un problema real, no de una idea bonita.
+        </p>
       </div>
     </div>
+
+    <!-- Quién está detrás -->
+    <div class="page-section">
+      <div class="page-section-head">
+        <h2>Quién está detrás</h2>
+      </div>
+      <div class="icgs-card" style="padding:30px 36px;max-width:640px;">
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:17px;margin-bottom:4px;">
+          Ivan César González Sagrera
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text-dim);margin-bottom:16px;letter-spacing:.05em;">
+          ADMINISTRADOR Y RESPONSABLE TÉCNICO
+        </div>
+        <p style="font-size:14.5px;color:var(--text-muted);margin:0;line-height:1.65;">
+          Con formación oficial en Transformación Digital de Pymes (programa Generación Digital Pymes,
+          Secretaría de Estado de Digitalización e IA / Fundación EOI, financiado por fondos Next
+          Generation EU — 375 horas), además de la experiencia directa construyendo y desplegando cada
+          uno de los sistemas que ICGS ofrece.
+        </p>
+      </div>
+    </div>
+
+    <!-- Tarjeta de datos -->
+    <div class="page-section">
+      <div class="icgs-card" style="padding:28px 32px;max-width:540px;">
+        <div style="display:grid;grid-template-columns:auto 1fr;gap:10px 24px;align-items:baseline;">
+          <span class="mono" style="font-size:11px;color:var(--text-dim);letter-spacing:.07em;">EMPRESA</span>
+          <span style="font-size:14.5px;">ICGS Gestión &amp; Servicios S.L.</span>
+          <span class="mono" style="font-size:11px;color:var(--text-dim);letter-spacing:.07em;">SEDE</span>
+          <span style="font-size:14.5px;">Pozoblanco (Los Pedroches), Córdoba</span>
+          <span class="mono" style="font-size:11px;color:var(--text-dim);letter-spacing:.07em;">ÁMBITO</span>
+          <span style="font-size:14.5px;">Infraestructura · Desarrollo · Automatización · IA aplicada</span>
+          <span class="mono" style="font-size:11px;color:var(--text-dim);letter-spacing:.07em;">STACK</span>
+          <span style="font-size:14.5px;">Docker · Cloudflare · Caddy · Django · ORDIX</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-box">
+      <div>
+        <h2>¿Trabajamos juntos?</h2>
+        <p>Cuéntanos qué necesitas y te decimos si podemos ayudarte.</p>
+      </div>
+      <a class="btn btn-primary" href="/contacto/">Solicitar propuesta</a>
+    </div>
+
   </div>
 </div>
 {% endblock %}

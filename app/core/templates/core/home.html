@@ -71,20 +71,25 @@
     </div>
 
     <div class="proof-grid reveal">
-      {% for p in projects %}
+      {% if caso_real %}
       <div class="proof-card">
-        <span class="badge badge-live"><span class="d"></span>En producción</span>
-        <p class="proof-quote" style="margin-top:20px;">{{ p.summary }}</p>
-        {% if p.stack %}
-        <p style="color:var(--text-muted);font-size:13px;margin-top:12px;">{{ p.stack }}</p>
-        {% endif %}
-        <a href="/proyectos/" style="display:inline-block;margin-top:18px;font-size:14px;color:var(--clay);font-weight:600;">Ver todos los proyectos →</a>
+        <p class="proof-quote">{{ caso_real.descripcion_home }}</p>
+        <a href="{{ caso_real.url_detalle }}" class="sol-link" style="margin-top:20px;">{{ caso_real.texto_cta }}</a>
       </div>
-      {% empty %}
+      <div class="proof-card" style="padding:0;overflow:hidden;display:flex;flex-direction:column;">
+        {% if caso_real.imagen_home %}
+        <img src="{{ caso_real.imagen_home.url }}" alt="{{ caso_real.pie_imagen }}"
+             style="width:100%;display:block;flex:1;object-fit:cover;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--text-dim);padding:10px 16px;border-top:1px solid var(--line);">
+          {{ caso_real.pie_imagen }}
+        </div>
+        {% endif %}
+      </div>
+      {% else %}
       <div class="proof-card">
         <p style="color:var(--text-muted);">Próximamente: casos reales en producción.</p>
       </div>
-      {% endfor %}
+      {% endif %}
     </div>
   </div>
 </section>
@@ -120,31 +125,18 @@
     </div>
 
     <div class="sol-grid reveal">
+      {% for s in soluciones %}
       <div class="sol-card">
-        <img src="{% static 'img/icgs/ordix-mark.png' %}" alt="ORDIX" class="sol-icon">
-        <div class="sol-cat">SaaS · Núcleo operativo</div>
-        <h3>ORDIX CORE</h3>
-        <span class="badge badge-dev"><span class="d"></span>En desarrollo activo</span>
-        <p>El sistema operativo modular para pymes que da forma a cada implantación: agenda, archivos, comunicaciones y contactos en una única base. Sus primeros módulos ya están validados en producción real.</p>
-        <a href="https://icgs.es/soluciones/ordix/" class="sol-link">Ver ORDIX →</a>
+        {% if s.icono_static %}<img src="{% static s.icono_static %}" alt="{{ s.nombre }}" class="sol-icon">{% endif %}
+        <div class="sol-cat">{{ s.cat }}</div>
+        <h3>{{ s.titulo_card }}</h3>
+        <span class="badge {{ s.badge_clase }}"><span class="d"></span>{{ s.badge_texto }}</span>
+        <p>{{ s.descripcion_card }}</p>
+        <a href="{{ s.url_detalle }}" class="sol-link">{{ s.texto_cta }}</a>
       </div>
-
-      <div class="sol-card">
-        <img src="{% static 'img/icgs/sooi-icono.png' %}" alt="SOOI" class="sol-icon">
-        <div class="sol-cat">Inmobiliario · Oportunidades</div>
-        <h3>SOOI</h3>
-        <span class="badge badge-live"><span class="d"></span>En producción</span>
-        <p>Sistema Operativo de Oportunidades Inmobiliarias. Organiza captaciones, oportunidades, tareas, alertas y seguimiento comercial con exploración asistida por IA.</p>
-        <a href="https://sooi.io" class="sol-link">Ver SOOI →</a>
-      </div>
-
-      <div class="sol-card">
-        <div class="sol-cat">Robótica aplicada · Operaciones</div>
-        <h3>ICGS Robotics Lab</h3>
-        <span class="badge badge-dev"><span class="d"></span>MVP en curso</span>
-        <p>Capa propia de misión, teleoperación y evidencias sobre robots comerciales como Unitree Go2. Primer caso de uso: inspección supervisada con informe automático.</p>
-        <a href="https://icgs.es/soluciones/robotics-lab/" class="sol-link">Ver Robotics Lab →</a>
-      </div>
+      {% empty %}
+      <div class="sol-card"><p style="color:var(--text-muted);">Próximamente.</p></div>
+      {% endfor %}
     </div>
   </div>
 </section>
@@ -164,6 +156,7 @@
     {% endif %}
     <form method="post" action="{% url 'contact' %}" class="contact-form">
       {% csrf_token %}
+      <input type="hidden" name="origin" value="home">
       <div class="field">
         <label for="f-name">Nombre</label>
         <input type="text" id="f-name" name="name" required placeholder="Tu nombre">

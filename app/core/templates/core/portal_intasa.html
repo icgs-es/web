@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block title %}Portal INTASA · Gestión y planificación de obra{% endblock %}
+{% block meta_description %}Plataforma operativa para constructoras: control horario, compras, almacén y planificación de obra en un único flujo de trabajo, en uso real.{% endblock %}
+
+{% block extra_css %}
+<style>
+  .intasa-hero{display:grid;grid-template-columns:1.6fr 1fr;gap:40px;align-items:start;}
+  @media(max-width:767px){.intasa-hero{grid-template-columns:1fr;}}
+  .gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+    gap:16px;
+  }
+  .gallery-item{
+    border:1px solid var(--line);border-radius:6px;overflow:hidden;
+    background:var(--bg-elevated);
+  }
+  .gallery-item img{width:100%;display:block;aspect-ratio:16/10;object-fit:cover;}
+  .gallery-caption{
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;
+    color:var(--text-dim);padding:10px 14px;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-content">
+  <div class="wrap">
+
+    <!-- Hero -->
+    <div class="page-section intasa-hero">
+      <div>
+        <div class="eyebrow">PORTAL INTASA · Gestión y planificación de obra</div>
+        <h1 style="font-size:clamp(28px,3.2vw,40px);margin-bottom:16px;">
+          La obra, controlada desde un único sitio.
+        </h1>
+        <p style="font-size:17px;color:var(--text-muted);margin-bottom:28px;">
+          Plataforma operativa desarrollada por ICGS para una constructora real, en uso diario.
+          Control horario, compras, almacén y planificación de obra, todo conectado — no son módulos
+          sueltos, es un único flujo de trabajo.
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;">
+          <a class="btn btn-primary" href="/contacto/">Solicitar una demo</a>
+          <a class="btn btn-ghost" href="/">Volver a ICGS</a>
+        </div>
+      </div>
+      <div class="icgs-card">
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;margin-bottom:10px;">Estado</div>
+        <span class="badge badge-live" style="margin-bottom:14px;"><span class="d"></span>Beta comercial</span>
+        <p style="color:var(--text-muted);font-size:14px;margin:0;">
+          Sistema en uso real por una constructora. Módulos validados en producción diaria.
+        </p>
+      </div>
+    </div>
+
+    <!-- Qué resuelve -->
+    <div class="page-section">
+      <div class="page-section-head">
+        <h2>Qué resuelve</h2>
+        <p>Ocho módulos conectados en un único flujo operativo.</p>
+      </div>
+      <div class="g4">
+        <div class="icgs-card">
+          <h3 style="font-size:15.5px;margin-bottom:6px;">Control horario y fichaje</h3>
+          <p style="color:var(--text-muted);font-size:13.5px;margin:0;">Registro de jornada por trabajador, integrado con planificación.</p>
+        </div>
+        <div class="icgs-card">
+          <h3 style="font-size:15.5px;margin-bottom:6px;">Agenda y comunicaciones</h3>
+          <p style="color:var(--text-muted);font-size:13.5px;margin:0;">Coordinación del equipo centralizada, sin depender del móvil.</p>
+        </div>
+        <div class="icgs-card">
+          <h3 style="font-size:15.5px;margin-bottom:6px;">CRM y seguimiento comercial</h3>
+          <p style="color:var(--text-muted);font-size:13.5px;margin:0;">Clientes, ofertas y obras en un solo sitio con trazabilidad.</p>
+        </div>
+        <div class="icgs-card">
+          <h3 style="font-size:15.5px;margin-bottom:6px;">Gestión documental y activos</h3>
+          <p style="color:var(--text-muted);font-size:13.5px;margin:0;">Documentos vinculados a obras, partidas y trabajadores.</p>
+        </div>
+        <div class="icgs-card">
+          <h3 style="font-size:15.5px;margin-bottom:6px;">Planificación de obra</h3>
+          <p style="color:var(--text-muted);font-size:13.5px;margin:0;">Sincronización con sistemas existentes, sin migrar todo de golpe.</p>
+        </div>
+        <div class="icgs-card">
+          <h3 style="font-size:15.5px;margin-bottom:6px;">OCR de facturas</h3>
+          <p style="color:var(--text-muted);font-size:13.5px;margin:0;">Reconocimiento automático por proveedor: menos trabajo manual.</p>
+        </div>
+        <div class="icgs-card">
+          <h3 style="font-size:15.5px;margin-bottom:6px;">Trazabilidad de almacén</h3>
+          <p style="color:var(--text-muted);font-size:13.5px;margin:0;">Qué entra, qué sale, a qué partida va — sin hoja de cálculo.</p>
+        </div>
+        <div class="icgs-card">
+          <h3 style="font-size:15.5px;margin-bottom:6px;">Control de albaranes</h3>
+          <p style="color:var(--text-muted);font-size:13.5px;margin:0;">Evita duplicar stock y pagar dos veces por el mismo material.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Flujo real -->
+    <div class="page-section">
+      <div class="page-section-head">
+        <h2>Flujo real: de la factura al informe</h2>
+        <p>Así circula la información dentro del sistema, de principio a fin.</p>
+      </div>
+      <div class="pipeline-card" style="max-width:480px;">
+        <div class="pipeline-label">
+          <span>COMPRAS A OBRA · EN USO REAL</span>
+          <span class="live"><span class="pulse-dot"></span>EN PRODUCCIÓN</span>
+        </div>
+        <div class="pipeline">
+          <div class="pnode active">
+            <div class="idx">1</div>
+            <div><div class="label">Factura recibida</div><div class="sub">PDF de proveedor</div></div>
+          </div>
+          <div class="pnode active">
+            <div class="idx">2</div>
+            <div><div class="label">Lectura OCR</div><div class="sub">plantilla por proveedor</div></div>
+          </div>
+          <div class="pnode">
+            <div class="idx">3</div>
+            <div><div class="label">Entrada en almacén</div><div class="sub">sin duplicar stock</div></div>
+          </div>
+          <div class="pnode">
+            <div class="idx">4</div>
+            <div><div class="label">Asignación a partida</div><div class="sub">tarea / obra</div></div>
+          </div>
+          <div class="pnode">
+            <div class="idx">5</div>
+            <div><div class="label">Informe disponible</div><div class="sub">control y trazabilidad</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Galería de capturas -->
+    {% if screenshots %}
+    <div class="page-section">
+      <div class="page-section-head">
+        <h2>El sistema en uso</h2>
+        <p>Capturas reales de los módulos en producción.</p>
+      </div>
+      <div class="gallery-grid">
+        {% for s in screenshots %}
+        <div class="gallery-item">
+          <img src="{{ s.image.url }}" alt="{{ s.caption }}" loading="lazy">
+          {% if s.caption %}<div class="gallery-caption">{{ s.caption }}</div>{% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- CTA final -->
+    <div class="cta-box">
+      <div>
+        <h2>¿Quieres ver Portal INTASA en marcha?</h2>
+        <p>Podemos hacer una demo real del sistema y valorar si encaja con tu operativa.</p>
+      </div>
+      <a class="btn btn-primary" href="/contacto/">Solicitar una demo</a>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

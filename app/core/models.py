@@ -57,9 +57,14 @@ class Service(models.Model):
 class Project(models.Model):
     title = models.CharField(max_length=140)
     slug = models.SlugField(max_length=160, unique=True, blank=True)
+    cat = models.CharField(max_length=120, blank=True, help_text="Etiqueta sol-cat, ej: 'ICGS ROBOTICS LAB · Nexo Operativo'")
+    titulo_card = models.CharField(max_length=200, blank=True, help_text="Titular descriptivo del card")
     summary = models.CharField(max_length=240, blank=True)
+    badge_clase = models.CharField(max_length=30, default='badge-dev', help_text="badge-live o badge-dev")
+    badge_texto = models.CharField(max_length=60, blank=True)
     stack = models.CharField(max_length=120, blank=True)
     url = models.URLField(blank=True)
+    url_detalle = models.CharField(max_length=200, blank=True, help_text="URL de la página de detalle, ej: /proyectos/robotics-lab/")
     is_active = models.BooleanField(default=True)
     order = models.PositiveIntegerField(default=100)
 
@@ -76,6 +81,59 @@ class Project(models.Model):
     def __str__(self):
         return self.title
     
+class Solucion(models.Model):
+    slug = models.SlugField(max_length=80, unique=True)
+    nombre = models.CharField(max_length=120)
+
+    # Campos de tarjeta (home #soluciones + índice /soluciones/)
+    cat = models.CharField(max_length=120, blank=True, help_text="Etiqueta sol-cat, ej: 'Inmobiliario · Oportunidades'")
+    titulo_card = models.CharField(max_length=200, blank=True, help_text="Titular descriptivo del sol-card")
+    badge_clase = models.CharField(max_length=30, default='badge-dev', help_text="badge-live o badge-dev")
+    badge_texto = models.CharField(max_length=60, blank=True, help_text="Texto del badge, ej: 'En producción'")
+    descripcion_card = models.TextField(blank=True, help_text="Descripción corta para la tarjeta")
+    icono_static = models.CharField(max_length=100, blank=True, help_text="Ruta relativa a static/, ej: img/icgs/ordix-mark.png")
+
+    # Campos de la sección proof (caso real) en home
+    descripcion_home = models.TextField(blank=True, help_text="Texto largo para la sección 'Caso real' de la home")
+    imagen_home = models.ImageField(upload_to='soluciones/', blank=True, null=True)
+    pie_imagen = models.CharField(max_length=120, blank=True)
+    destacado_en_home = models.BooleanField(default=False)
+
+    url_detalle = models.CharField(max_length=200)
+    texto_cta = models.CharField(max_length=80, default='Ver solución →')
+    is_active = models.BooleanField(default=True)
+    order = models.PositiveIntegerField(default=100)
+
+    class Meta:
+        ordering = ['order']
+        verbose_name = 'Solución'
+        verbose_name_plural = 'Soluciones'
+
+    def __str__(self):
+        return self.nombre
+
+
+class Screenshot(models.Model):
+    PAGE_CHOICES = [
+        ('portal_intasa', 'Portal INTASA'),
+        ('ordix', 'ORDIX CORE'),
+        ('robotics', 'Robotics Lab'),
+    ]
+    page = models.CharField(max_length=40, choices=PAGE_CHOICES, default='portal_intasa')
+    image = models.ImageField(upload_to='screenshots/')
+    caption = models.CharField(max_length=120, blank=True)
+    order = models.PositiveIntegerField(default=100)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ['page', 'order']
+        verbose_name = 'Captura de pantalla'
+        verbose_name_plural = 'Capturas de pantalla'
+
+    def __str__(self):
+        return f"{self.get_page_display()} · {self.caption or f'#{self.order}'}"
+
+
 class Lead(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     name = models.CharField(max_length=120, blank=True)

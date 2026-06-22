@@ -12,19 +12,18 @@
 
     <div class="g3">
       {% for p in projects %}
-        <div class="icgs-card">
-          <h2 style="font-size:17px;margin-bottom:8px;">{{ p.title }}</h2>
-          {% if p.stack %}<span class="badge badge-dev" style="margin-bottom:10px;">{{ p.stack }}</span>{% endif %}
-          {% if p.summary %}
-            <p style="color:var(--text-muted);font-size:14px;margin:0;">{{ p.summary }}</p>
-          {% endif %}
-        </div>
+      <a href="{{ p.url_detalle }}" class="sol-card" style="text-decoration:none;">
+        <div class="sol-cat">{{ p.cat }}</div>
+        <h3>{{ p.titulo_card }}</h3>
+        <span class="badge {{ p.badge_clase }}"><span class="d"></span>{{ p.badge_texto }}</span>
+        <p>{{ p.summary }}</p>
+        <span class="sol-link">Ver proyecto →</span>
+      </a>
       {% empty %}
-        <div class="icgs-card" style="grid-column:1/-1;">
-          <p style="color:var(--text-muted);margin:0;">Aún no hay proyectos cargados.</p>
-        </div>
+      <p style="color:var(--text-muted);">Próximamente.</p>
       {% endfor %}
     </div>
+
   </div>
 </div>
 {% endblock %}

@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}ICGS en Los Pedroches · Integración industrial{% endblock %}
+{% block meta_description %}ICGS lleva infraestructura, automatización y datos a la industria de Los Pedroches: agroindustria, cooperativas, administraciones locales y entornos rurales.{% endblock %}
+
+{% block extra_css %}
+<style>
+  .pedroches-hero{display:grid;grid-template-columns:1.6fr 1fr;gap:40px;align-items:start;}
+  @media(max-width:767px){.pedroches-hero{grid-template-columns:1fr;}}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-content">
+  <div class="wrap">
+
+    <!-- Hero -->
+    <div class="page-section pedroches-hero">
+      <div>
+        <div class="eyebrow">ICGS EN LOS PEDROCHES · Integración industrial</div>
+        <h1 style="font-size:clamp(28px,3.2vw,40px);margin-bottom:16px;">
+          Llevamos infraestructura, automatización y datos a la industria de la comarca.
+        </h1>
+        <p style="font-size:17px;color:var(--text-muted);margin-bottom:28px;">
+          No vendemos tecnología futurista. Ayudamos a administraciones, cooperativas, fincas y
+          agroindustria a digitalizar lo que ya hacen: inspección, mantenimiento, datos de campo
+          e informes — con la misma experiencia en SaaS e infraestructura que ya aplicamos en
+          ORDIX y Portal INTASA.
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;">
+          <a class="btn btn-primary" href="/contacto/">Hablar con ICGS</a>
+          <a class="btn btn-ghost" href="/proyectos/robotics-lab/">Ver Robotics Lab →</a>
+        </div>
+      </div>
+      <div class="icgs-card">
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;margin-bottom:10px;">Estado</div>
+        <span class="badge badge-dev" style="margin-bottom:14px;"><span class="d"></span>Acercamiento institucional</span>
+        <p style="color:var(--text-muted);font-size:14px;margin:0;">
+          En proceso de contacto con administraciones y actores locales de la comarca.
+        </p>
+      </div>
+    </div>
+
+    <!-- Dos líneas de trabajo -->
+    <div class="page-section">
+      <div class="page-section-head">
+        <h2>Dos líneas de trabajo</h2>
+        <p>Institucional y privada, con tecnología compartida.</p>
+      </div>
+      <div class="g2">
+        <div class="icgs-card">
+          <h3 style="font-size:17px;margin-bottom:10px;">Línea institucional · Smart Rural</h3>
+          <p style="color:var(--text-muted);font-size:14.5px;margin:0;">
+            Complementamos los sensores e IoT ya desplegados en la comarca (Distrito Smart Norte)
+            con captura de datos móvil — robot terrestre, dron, evidencias geolocalizadas e informes
+            automáticos — junto a ayuntamientos, CADE, CICAP y programas de innovación rural.
+          </p>
+        </div>
+        <div class="icgs-card">
+          <h3 style="font-size:17px;margin-bottom:10px;">Línea privada · Agroindustrial y ganadera</h3>
+          <p style="color:var(--text-muted);font-size:14.5px;margin:0;">
+            Para cooperativas, fincas, agroindustrias, instalaciones ganaderas, naves y plantas
+            solares: menos desplazamientos, incidencias documentadas, informes trazables listos
+            para actuar.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Enlace a Robotics Lab -->
+    <div class="page-section">
+      <div class="icgs-card" style="padding:32px 36px;">
+        <div class="eyebrow" style="margin-bottom:12px;">Tecnología relacionada</div>
+        <h2 style="font-size:clamp(20px,2.2vw,26px);margin-bottom:10px;">ICGS Robotics Lab</h2>
+        <p style="color:var(--text-muted);font-size:14.5px;margin-bottom:24px;">
+          Esta estrategia territorial y de servicios se apoya en el trabajo de Robotics Lab,
+          que desarrolla la capa de software y operaciones para robótica aplicada.
+          Son proyectos distintos — uno es la estrategia de presencia en la comarca, el otro
+          es la tecnología en sí — pero comparten base técnica y visión.
+        </p>
+        <a class="btn btn-ghost" href="/proyectos/robotics-lab/">Ver ICGS Robotics Lab →</a>
+      </div>
+    </div>
+
+    <!-- CTA final -->
+    <div class="cta-box">
+      <div>
+        <h2>¿Tu empresa o administración está en Los Pedroches?</h2>
+        <p>Cuéntanos qué necesitas digitalizar y valoramos juntos cómo ayudarte.</p>
+      </div>
+      <a class="btn btn-primary" href="/contacto/">Contactar con ICGS</a>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

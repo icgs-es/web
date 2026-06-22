@@ -10,23 +10,46 @@
       <p class="lead">Escríbeme y te respondo con una propuesta clara.</p>
     </div>
 
-    <div class="g2">
+    <div class="g2" style="margin-bottom:48px;">
       <div class="icgs-card">
         <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;margin-bottom:6px;">Email</div>
         <div style="color:var(--text-muted);font-size:14.5px;">{{ settings.email|default:"ivan@icgs.es" }}</div>
-        <a class="btn btn-primary" href="mailto:{{ settings.email|default:'ivan@icgs.es' }}" style="margin-top:20px;">
-          Enviar correo
+        <a class="btn btn-ghost" href="mailto:{{ settings.email|default:'ivan@icgs.es' }}" style="margin-top:20px;">
+          Enviar correo directo
         </a>
       </div>
-
       <div class="icgs-card">
         <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;margin-bottom:6px;">Llamada / reunión</div>
-        <div style="color:var(--text-muted);font-size:14.5px;">Si prefieres, lo coordinamos por email.</div>
-        <a class="btn btn-ghost" href="{{ settings.primary_cta_url|default:'/contacto/' }}" style="margin-top:20px;">
-          Solicitar
-        </a>
+        <div style="color:var(--text-muted);font-size:14.5px;">Si prefieres, lo coordinamos por email o usa el formulario.</div>
       </div>
     </div>
+
+    {% if enviado %}
+    <div class="contact-ok" style="text-align:center;max-width:520px;margin:0 auto;">Mensaje recibido. Te respondo lo antes posible.</div>
+    {% else %}
+    {% if form_error %}
+    <div class="contact-error" style="text-align:center;max-width:520px;margin:0 auto 16px;">Rellena nombre, email y mensaje antes de enviar.</div>
+    {% endif %}
+    <form method="post" action="{% url 'contact' %}" class="contact-form">
+      {% csrf_token %}
+      <input type="hidden" name="origin" value="contact">
+      <div class="field">
+        <label for="f-name">Nombre</label>
+        <input type="text" id="f-name" name="name" required placeholder="Tu nombre">
+      </div>
+      <div class="field">
+        <label for="f-email">Email</label>
+        <input type="email" id="f-email" name="email" required placeholder="tu@email.com">
+      </div>
+      <div class="field">
+        <label for="f-message">Mensaje</label>
+        <textarea id="f-message" name="message" rows="5" required placeholder="Cuéntanos qué necesitas..."></textarea>
+      </div>
+      <div class="submit-row">
+        <button type="submit" class="btn btn-primary">Enviar mensaje →</button>
+      </div>
+    </form>
+    {% endif %}
   </div>
 </div>
 {% endblock %}
