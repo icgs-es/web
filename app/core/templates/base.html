@@ -228,6 +228,10 @@
   .proof-grid{display:grid;grid-template-columns:1fr;gap:40px;}
   @media(min-width:900px){.proof-grid{grid-template-columns:1fr 1.5fr;}}
   .proof-card{border:1px solid var(--line);background:var(--bg);border-radius:6px;padding:30px;}
+  .li-link{display:inline-flex;align-items:center;gap:7px;color:var(--text-dim);text-decoration:none;font-size:13.5px;transition:color .15s;}
+  .li-link:hover{color:var(--clay);}
+  .li-icon{display:inline-flex;align-items:center;color:var(--text-dim);transition:color .15s;}
+  .li-icon:hover{color:var(--clay);}
 
   .feature-list{margin-top:22px;display:flex;flex-direction:column;gap:13px;}
   .feature-list li{
@@ -412,7 +416,12 @@
 
 <footer>
   <div class="wrap foot-grid">
-    <div>© {% now "Y" %} ICGS Gestión &amp; Servicios S.L. · Pozoblanco (Los Pedroches), Córdoba</div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      © {% now "Y" %} ICGS Gestión &amp; Servicios S.L. · Pozoblanco (Los Pedroches), Córdoba
+      <a href="https://www.linkedin.com/in/ivan-icgs/" target="_blank" rel="noopener" class="li-icon" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+    </div>
     <div class="foot-links">
       <a href="/servicios/">Servicios</a>
       <a href="/soluciones/">Soluciones</a>
