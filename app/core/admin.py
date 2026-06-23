@@ -17,11 +17,17 @@ class SiteSettingsAdmin(admin.ModelAdmin):
 
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
-    list_display = ("title", "is_active", "order")
+    list_display = ("title", "precio_badge", "is_active", "order")
     list_filter = ("is_active",)
+    list_editable = ("is_active", "order")
     search_fields = ("title", "summary")
     prepopulated_fields = {"slug": ("title",)}
     ordering = ("order", "title")
+    fieldsets = (
+        ("Identidad", {"fields": ("title", "slug", "summary", "is_active", "order", "icono_key")}),
+        ("Contenido", {"fields": ("descripcion", "incluye")}),
+        ("Precio y CTA", {"fields": ("precio_badge", "precio_detalle", "cta_texto", "cta_url")}),
+    )
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):

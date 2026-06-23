@@ -37,6 +37,17 @@ class Service(models.Model):
     slug = models.SlugField(max_length=160, unique=True, blank=True)
     summary = models.CharField(max_length=240, blank=True)
     content = models.TextField(blank=True)
+
+    # Campos de tarjeta rica
+    descripcion = models.TextField(blank=True, help_text="Párrafo principal de presentación del servicio")
+    incluye = models.TextField(blank=True, help_text="Lista de lo que incluye — un elemento por línea")
+    precio_badge = models.CharField(max_length=60, blank=True, help_text="Ej: Desde 60 €/mes")
+    precio_detalle = models.TextField(blank=True, help_text="Desglose de precios — una línea por tramo")
+    cta_texto = models.CharField(max_length=80, blank=True, default='Consultar →')
+    cta_url = models.CharField(max_length=200, blank=True, default='/contacto/')
+    icono_key = models.CharField(max_length=30, blank=True,
+        help_text="shield | server | code | gear")
+
     is_active = models.BooleanField(default=True)
     order = models.PositiveIntegerField(default=100)
 

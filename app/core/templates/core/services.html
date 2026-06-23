@@ -1,27 +1,168 @@
 {% extends "base.html" %}
 
 {% block title %}Servicios · ICGS{% endblock %}
+{% block meta_description %}Mantenimiento IT, infraestructura, desarrollo de aplicaciones y automatización para pymes. Tecnología que trabaja para ti, no al revés.{% endblock %}
+
+{% block extra_css %}
+<style>
+  .srv-hero{padding:64px 0 48px;}
+  .srv-grid{display:grid;grid-template-columns:1fr;gap:32px;margin-top:48px;}
+  @media(min-width:860px){.srv-grid{grid-template-columns:1fr 1fr;}}
+
+  .srv-card{
+    border:1px solid var(--line);border-radius:8px;background:var(--bg);
+    display:flex;flex-direction:column;overflow:hidden;
+  }
+  .srv-card-head{padding:28px 30px 0;}
+  .srv-num{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;
+    color:var(--text-dim);letter-spacing:.1em;margin-bottom:16px;
+  }
+  .srv-icon{
+    width:36px;height:36px;color:var(--clay);margin-bottom:14px;
+    stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;
+  }
+  .srv-title{font-size:19px;font-weight:700;margin-bottom:10px;line-height:1.25;}
+  .srv-badge{
+    display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:11.5px;
+    background:var(--clay-subtle,rgba(176,94,55,.1));color:var(--clay);
+    border:1px solid rgba(176,94,55,.25);border-radius:4px;
+    padding:3px 10px;margin-bottom:18px;
+  }
+  .srv-desc{font-size:14.5px;color:var(--text-muted);line-height:1.7;margin-bottom:20px;}
+  .srv-incluye{margin:0 0 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px;}
+  .srv-incluye li{
+    display:flex;align-items:flex-start;gap:9px;
+    font-size:13.5px;color:var(--text-muted);line-height:1.5;
+  }
+  .srv-incluye li::before{
+    content:"";flex-shrink:0;margin-top:7px;
+    width:5px;height:5px;border-radius:50%;background:var(--sage);
+  }
+  .srv-card-foot{
+    margin-top:auto;padding:22px 30px 26px;
+    border-top:1px solid var(--line);background:var(--bg-elevated);
+  }
+  .srv-precios{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;
+    color:var(--text-dim);line-height:1.8;margin-bottom:16px;
+  }
+  .srv-cta{
+    display:inline-flex;align-items:center;
+    font-size:14px;font-weight:600;color:var(--clay);text-decoration:none;
+    transition:opacity .15s;
+  }
+  .srv-cta:hover{opacity:.75;}
+
+  /* ¿Por dónde empezamos? */
+  .srv-start{background:var(--bg-elevated);border-radius:8px;padding:48px 40px;margin:64px 0;}
+  .srv-start-grid{display:grid;grid-template-columns:1fr;gap:20px;margin-top:32px;}
+  @media(min-width:700px){.srv-start-grid{grid-template-columns:1fr 1fr;}}
+  .srv-option{
+    border:1px solid var(--line);border-radius:6px;background:var(--bg);padding:24px 26px;
+  }
+  .srv-option-label{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--clay);
+    letter-spacing:.1em;margin-bottom:8px;
+  }
+  .srv-option h3{font-size:15px;font-weight:700;margin-bottom:10px;}
+  .srv-option p{font-size:13.5px;color:var(--text-muted);margin:0;line-height:1.6;}
+  .srv-nota{
+    font-size:12.5px;color:var(--text-dim);text-align:center;
+    margin-top:40px;font-family:'IBM Plex Mono',monospace;
+  }
+</style>
+{% endblock %}
 
 {% block content %}
 <div class="page-content">
   <div class="wrap">
-    <div class="page-head">
-      <h1>Servicios</h1>
-      <p class="lead">Infraestructura, automatización y desarrollo a medida.</p>
+
+    <!-- HERO -->
+    <div class="srv-hero">
+      <div class="eyebrow">SERVICIOS</div>
+      <h1 style="font-size:clamp(30px,3.5vw,46px);max-width:720px;margin-bottom:16px;">
+        Tecnología que trabaja para ti, no al revés.
+      </h1>
+      <p style="font-size:17px;color:var(--text-muted);max-width:640px;line-height:1.65;">
+        No vendemos horas de técnico. Construimos sistemas que hacen que tu empresa funcione mejor — desde el primer mes.
+      </p>
     </div>
 
-    <div class="g3">
+    <!-- TARJETAS DE SERVICIO -->
+    <div class="srv-grid">
       {% for s in services %}
-        <div class="icgs-card">
-          <h2 style="font-size:17px;margin-bottom:8px;">{{ s.title }}</h2>
-          <p style="color:var(--text-muted);font-size:14px;margin:0;">{{ s.summary }}</p>
+      <div class="srv-card">
+        <div class="srv-card-head">
+          <div class="srv-num">0{{ forloop.counter }}</div>
+
+          <!-- Icono según icono_key -->
+          {% if s.icono_key == "shield" %}
+          <svg class="srv-icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          {% elif s.icono_key == "server" %}
+          <svg class="srv-icon" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="6" rx="2"/><rect x="2" y="15" width="20" height="6" rx="2"/><path d="M6 6h.01M6 18h.01"/></svg>
+          {% elif s.icono_key == "code" %}
+          <svg class="srv-icon" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          {% elif s.icono_key == "gear" %}
+          <svg class="srv-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14M12 2v2M12 20v2M2 12H4M20 12h2M6.34 6.34 4.93 4.93M19.07 19.07l-1.41-1.41M17.66 6.34l1.41-1.41M6.34 17.66l-1.41 1.41"/></svg>
+          {% endif %}
+
+          <h2 class="srv-title">{{ s.title }}</h2>
+          {% if s.precio_badge %}<span class="srv-badge">{{ s.precio_badge }}</span>{% endif %}
+          {% if s.descripcion %}<p class="srv-desc">{{ s.descripcion }}</p>{% endif %}
+
+          {% if s.incluye %}
+          <ul class="srv-incluye" style="margin-bottom:24px;">
+            {% for item in s.incluye.splitlines %}{% if item %}
+            <li>{{ item }}</li>
+            {% endif %}{% endfor %}
+          </ul>
+          {% endif %}
         </div>
+
+        <div class="srv-card-foot">
+          {% if s.precio_detalle %}
+          <div class="srv-precios">
+            {% for line in s.precio_detalle.splitlines %}{% if line %}{{ line }}<br>{% endif %}{% endfor %}
+          </div>
+          {% endif %}
+          {% if s.cta_texto %}
+          <a href="{{ s.cta_url }}" class="srv-cta">{{ s.cta_texto }}</a>
+          {% endif %}
+        </div>
+      </div>
       {% empty %}
-        <div class="icgs-card" style="grid-column:1/-1;">
-          <p style="color:var(--text-muted);margin:0;">Aún no hay servicios cargados.</p>
-        </div>
+      <p style="color:var(--text-muted);">Próximamente.</p>
       {% endfor %}
     </div>
+
+    <!-- ¿POR DÓNDE EMPEZAMOS? -->
+    <div class="srv-start">
+      <h2 style="font-size:clamp(22px,2.4vw,30px);margin-bottom:12px;">¿No sabes por dónde empezar?</h2>
+      <p style="font-size:15.5px;color:var(--text-muted);max-width:640px;line-height:1.65;margin:0;">
+        La primera conversación es gratis y sin compromiso. En 30 minutos te decimos, sin rodeos, qué tiene sentido hacer ahora mismo en tu empresa y qué no merece la pena tocar todavía. Sin presentaciones, sin jerga técnica.
+      </p>
+      <div class="srv-start-grid">
+        <div class="srv-option">
+          <div class="srv-option-label">OPCIÓN A · 250 – 500 €</div>
+          <h3>Auditoría inicial</h3>
+          <p>Si quieres un diagnóstico formal por escrito con lo que tienes, lo que falla y lo que te recomendamos. Ideal antes de tomar cualquier decisión de inversión tecnológica.</p>
+        </div>
+        <div class="srv-option">
+          <div class="srv-option-label">OPCIÓN B · GRATUITA</div>
+          <h3>Llamada de 30 minutos</h3>
+          <p>Cuéntanos qué problema tienes. Nosotros te decimos si podemos resolverlo, cuánto costaría aproximadamente, y si hay una forma más sencilla de hacerlo.</p>
+        </div>
+      </div>
+      <div style="margin-top:28px;">
+        <a href="/contacto/" class="btn btn-primary">Solicitar reunión →</a>
+      </div>
+    </div>
+
+    <p class="srv-nota">
+      Todos los precios orientativos, sin IVA. El presupuesto exacto depende del alcance real del proyecto. Contacta para una valoración sin compromiso.
+    </p>
+
   </div>
 </div>
 {% endblock %}
